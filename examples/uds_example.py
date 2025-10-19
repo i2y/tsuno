@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""
+Unix Domain Socket (UDS) Example
+
+This example demonstrates how to use z with Unix domain sockets.
+UDS is useful for:
+- Inter-process communication on the same host
+- Better performance than TCP for local connections
+- Nginx/reverse proxy integration
+- Systemd socket activation
+
+Usage:
+    # Method 1: Using z.run() API
+    python examples/uds_example.py
+
+    # Method 2: Using CLI with --uds
+    z examples.uds_example:application --uds /tmp/z.sock
+
+    # Method 3: Using CLI with --bind unix:
+    z examples.uds_example:application --bind unix:/tmp/z.sock
+
+    # Test with curl
+    curl --unix-socket /tmp/z.sock http://localhost/
+"""
+
+from z import run
+
+
+def application(environ, start_response):
+    """Simple WSGI application"""
+    status = "200 OK"
+    headers = [
+        ("Content-Type", "text/plain"),
+        ("X-Server", "z"),
+    ]
+    start_response(status, headers)
+
+    response = f"""Hello from z via Unix Domain Socket!
+
+Request Details:
+- Method: {environ['REQUEST_METHOD']}
+- Path: {environ['PATH_INFO']}
+- Query String: {environ.get('QUERY_STRING', '')}
+- Server Protocol: {environ['SERVER_PROTOCOL']}
+
+Unix Socket Path: {environ.get('SERVER_NAME', 'N/A')}
+"""
+    return [response.encode("utf-8")]
+
+
+if __name__ == "__main__":
+    import sys
+
+    socket_path = "/tmp/z.sock"
+
+    if len(sys.argv) > 1:
+        socket_path = sys.argv[1]
+
+    print(f"Starting z server on Unix socket: {socket_path}")
+    print(f"Test with: curl --unix-socket {socket_path} http://localhost/")
+    print()
+
+    run(
+        application,
+        uds=socket_path,
+        interface="wsgi",
+        blocking_threads=2,
+        log_level="INFO",
+    )

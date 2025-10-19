@@ -1,0 +1,56 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv
+venv/
+env/
+
+# Rust build artifacts
+target/
+*.so
+*.dylib
+*.dll
+# Keep Cargo.lock for reproducible builds
+
+# Backup directories
+backup_before_cleanup_*/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test coverage
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+
+# Documentation
+docs/_build/
+site/  # MkDocs build output
+
+# Log files
+*.log
+
+# Test binary files
+*.bin
+test.bin
+
+# Backup archives
+*-backup-*.tar.gz
+
+# Generated proto files (from testing)
+greeterservice*
+streamingservice*

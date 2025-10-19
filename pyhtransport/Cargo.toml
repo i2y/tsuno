@@ -1,0 +1,58 @@
+[package]
+name = "pyhtransport"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "pyhtransport"
+crate-type = ["cdylib"]
+
+[dependencies]
+# Core PyO3 dependencies
+# Using 0.26 for Python 3.14 and free-threading support
+# abi3-py311: Stable ABI for Python 3.11+ (single binary for multiple versions)
+# Required for Python 3.11+ due to tomllib dependency for TOML configuration
+# Note: abi3 is not compatible with free-threaded Python (3.13t/3.14t)
+pyo3 = { version = "0.26", features = ["extension-module", "abi3-py311"] }
+
+# Async runtime
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time", "sync", "signal"] }
+tokio-stream = { version = "0.1", features = ["sync"] }
+
+# HTTP/2 support
+hyper = { version = "1.7", features = ["client", "http2", "server"] }
+hyper-util = { version = "0.1", features = ["client-legacy", "server-auto", "http2"] }
+http = "1"
+http-body-util = "0.1"
+bytes = "1"
+
+# Networking
+socket2 = { version = "0.5", features = ["all"] }
+libc = "0.2"  # System calls and low-level networking
+
+# Concurrency and performance
+parking_lot = "0.12"
+once_cell = "1.19"  # For buffer pool
+mimalloc = { version = "0.1", default-features = false }  # Memory allocator
+num_cpus = "1.16"  # For detecting CPU count
+
+# Error handling
+anyhow = "1"
+
+# Logging and tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json", "fmt"] }
+
+# Async support (used internally by hyper/tokio)
+futures = "0.3"
+
+# WebSocket support
+tokio-tungstenite = "0.24"
+tungstenite = "0.24"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+opt-level = 3
+strip = true

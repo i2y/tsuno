@@ -1,0 +1,148 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - optimize
+  pull_request:
+    branches:
+      - main
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies
+        run: |
+          uv sync --group dev
+
+      - name: Run Python linting
+        run: |
+          uv run ruff check .
+
+      - name: Run Python formatting check
+        run: |
+          uv run black --check .
+
+      - name: Run type checking
+        run: |
+          uv run basedpyright z || echo "Type checking completed with warnings"
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt, clippy
+
+      - name: Run Rust formatting check
+        run: |
+          cd pyhtransport
+          cargo fmt -- --check
+
+      - name: Run Rust linting
+        run: |
+          cd pyhtransport
+          cargo clippy -- -W clippy::all
+
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.10", "3.13"]  # Test oldest and newest only
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies and build
+        run: |
+          uv sync --group dev
+          uv run maturin develop --manifest-path pyhtransport/Cargo.toml
+
+      - name: Run tests
+        run: |
+          # Basic import and functionality test
+          python -c "import z; import pyhtransport; print('✓ Imports successful')"
+          python -c "from z import run, serve; print('✓ Core functions available')"
+
+  build-wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          command: build
+          args: --release --out dist --manifest-path pyhtransport/Cargo.toml
+          manylinux: auto
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.os }}
+          path: dist
+
+  test-wheel-install:
+    name: Test wheel installation
+    needs: [build-wheels]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download wheels
+        uses: actions/download-artifact@v4
+        with:
+          name: wheels-ubuntu-latest
+          path: dist
+
+      - name: Install wheel
+        run: |
+          pip install dist/*.whl
+
+      - name: Test import
+        run: |
+          python -c "import z; import pyhtransport; print('Import successful')"

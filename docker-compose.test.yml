@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  z-linux-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.linux-test
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: |
+      bash -c "
+        echo 'Running Linux tests...' &&
+        bash tests/linux_basic_test.sh &&
+        echo '' &&
+        echo 'Running Linux benchmarks...' &&
+        bash tests/linux_benchmark_simple.sh
+      "

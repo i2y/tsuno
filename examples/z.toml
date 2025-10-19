@@ -1,0 +1,129 @@
+# z TOML Configuration Example
+# This file demonstrates all available configuration options for z server.
+
+# Server Binding
+# Bind address in format "host:port" or "unix:/path/to/socket"
+bind = "0.0.0.0:8000"
+
+# Worker Configuration
+# Number of worker processes (default: auto-detect based on CPU cores)
+workers = 7
+
+# Blocking threads per worker for synchronous operations
+threads = 2
+
+# Tokio I/O threads for Rust runtime (default: 1, optimal for HTTP/1.1)
+tokio_threads = 1
+
+# Worker Management
+# Worker timeout in seconds (Gunicorn-compatible)
+timeout = 30
+
+# Graceful shutdown timeout in seconds
+graceful_timeout = 30
+
+# HTTP Keep-Alive timeout in seconds (Gunicorn-compatible)
+keepalive = 5
+
+# Max requests per worker before restart (Gunicorn-compatible)
+max_requests = 10000
+
+# Random jitter for max_requests (Gunicorn-compatible)
+max_requests_jitter = 100
+
+# Max concurrent connections (Uvicorn-compatible)
+limit_concurrency = 2000
+
+# Socket listen backlog
+backlog = 2048
+
+# Process Management
+# PID file location (optional)
+pid_file = "/var/run/z.pid"
+
+# Run server in background (daemon mode)
+daemon = false
+
+# Unix Permissions (requires root)
+# Switch to this user after binding ports
+# user = "www-data"
+
+# Switch to this group after binding ports
+# group = "www-data"
+
+# File creation mask (octal format: use 0o prefix)
+# umask = 0o022
+
+# Logging Configuration
+# Python logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+log_level = "INFO"
+
+# Logging format (text or json)
+log_format = "text"
+
+# Access log file (use "-" for stdout, or specify file path)
+# access_log = "/var/log/z/access.log"
+
+# Error log file (use "-" for stderr, or specify file path)
+# error_log = "/var/log/z/error.log"
+
+# Development Options
+# Enable auto-reload on code changes (development only)
+reload = false
+
+# Delay between reload checks in seconds
+reload_delay = 0.25
+
+# Directories to watch for changes (optional)
+# reload_dirs = ["./app", "./config"]
+
+# File patterns to include in reload watch (optional)
+# reload_includes = ["*.py", "*.toml"]
+
+# File patterns to exclude from reload watch (optional)
+# reload_excludes = [".git/*", "__pycache__/*"]
+
+# ASGI Settings
+# Root path for submounted applications
+root_path = ""
+
+# Trusted proxy IP addresses (comma-separated or list)
+forwarded_allow_ips = "127.0.0.1,10.0.0.0/8"
+# Or as a list:
+# forwarded_allow_ips = ["127.0.0.1", "10.0.0.0/8"]
+
+# Worker Restart Configuration
+# Enable auto-restart of crashed workers (default: true)
+enable_worker_restart = true
+
+# Maximum restart attempts per worker (default: 5)
+max_restarts_per_worker = 5
+
+# SSL/TLS Configuration (Not yet implemented)
+# SSL key file path
+# ssl_keyfile = "/path/to/key.pem"
+
+# SSL certificate file path
+# ssl_certfile = "/path/to/cert.pem"
+
+# Password for encrypted SSL key
+# ssl_keyfile_password = "secret"
+
+# CA certificates file for client verification
+# ssl_ca_certs = "/path/to/ca.pem"
+
+# Advanced Options
+# Max simultaneous clients per worker (Gunicorn-compatible, not fully implemented)
+worker_connections = 1000
+
+# Custom server header (not fully implemented)
+# server_header = "z/0.1.0"
+
+# Include date header in responses (not fully implemented)
+# date_header = true
+
+# Custom response headers (not fully implemented)
+# headers = [
+#     ["X-Custom-Header", "value"],
+#     ["X-Another-Header", "another-value"]
+# ]

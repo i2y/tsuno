@@ -1,0 +1,101 @@
+[project]
+name = "z"
+version = "0.1.0"
+description = "High-performance WSGI/ASGI server for Python, powered by Rust"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "i2y", email = "" }
+]
+keywords = ["wsgi", "asgi", "server", "rust", "async", "http2", "fastapi", "flask", "django", "starlette", "z"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Rust",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "watchfiles>=0.24.0",
+    "python-dotenv>=1.0.0",
+    "click>=8.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/i2y/z"
+Repository = "https://github.com/i2y/z"
+Issues = "https://github.com/i2y/z/issues"
+
+[project.scripts]
+z = "z.cli.main:main"
+
+[project.optional-dependencies]
+# For high-performance servers
+server = []
+
+# uvloop for application-level I/O acceleration
+# Note: Only benefits apps with external I/O (databases, APIs, file I/O)
+# z's Rust transport layer does NOT use uvloop
+uvloop = [
+    "uvloop>=0.21.0; platform_system != 'Windows' and python_version < '3.14'",
+]
+
+[dependency-groups]
+# For high-performance servers
+server = []
+
+# Development dependencies
+dev = [
+    "maturin>=1.9.4",
+    "ruff>=0.8.0",
+    "basedpyright>=1.23.0",
+    "black>=24.10.0",
+    "isort>=5.13.0",
+    "pytest>=8.3.0",
+    "pytest-cov>=6.0.0",
+    "pytest-asyncio>=0.24.0",
+    # For testing examples
+    "flask>=3.1.0",
+    "fastapi>=0.115.0",
+    "pydantic>=2.10.0",
+]
+benchmark = [
+    "fastapi>=0.115.0",
+    "flask>=3.1.0",
+    "uvicorn[standard]>=0.32.0",
+    "gunicorn>=23.0.0",
+    "granian>=2.5.0",
+    "httpx>=0.27.0",
+    "pydantic>=2.10.0",
+    "matplotlib>=3.9.0",
+    "pandas>=2.2.0",
+    "psutil>=6.1.0",
+    "rich>=13.5.0",
+    "seaborn>=0.13.0",
+    "hypercorn>=0.17.3",
+]
+
+# Documentation dependencies
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.24.0",
+    "pymdown-extensions>=10.7.0",
+]
+
+[build-system]
+requires = ["maturin>=1.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+python-source = "."
+manifest-path = "pyhtransport/Cargo.toml"
+# Include the z Python package
+include = ["z/**/*.py", "z/**/*.pyi"]

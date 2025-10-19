@@ -1,0 +1,49 @@
+FROM ubuntu:22.04
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install basic tools and build environment
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    python3.11 \
+    python3.11-dev \
+    python3-pip \
+    git \
+    wrk \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Rust toolchain
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:$PATH"
+
+# Install uv using pip (more reliable for Docker)
+RUN python3.11 -m pip install uv
+
+WORKDIR /app
+COPY . .
+
+# Clean up any existing platform-specific binaries
+RUN find . -name "*.so" -type f -delete && \
+    find . -name "*.dylib" -type f -delete && \
+    rm -rf pyhtransport/target
+
+# Install dependencies and build (include all groups for uvloop)
+RUN uv sync --all-groups
+RUN cd pyhtransport && uv run maturin develop --release
+
+# Clean up .so files in project root (maturin develop creates these)
+# Keep only the ones in site-packages
+RUN echo "Checking for .so files..." && \
+    find /app -maxdepth 2 -name "*.so" -type f -ls && \
+    echo "Removing .so files in project root..." && \
+    rm -f /app/*.so && \
+    rm -f /app/pyhtransport/*.so && \
+    echo "Verifying removal..." && \
+    ls -la /app/*.so 2>&1 || echo "No .so files in /app root (good)" && \
+    ls -la /app/pyhtransport/*.so 2>&1 || echo "No .so files in /app/pyhtransport (good)" && \
+    echo ".so files should now only be in site-packages:" && \
+    find /app/.venv -name "pyhtransport*.so" -type f
+
+CMD ["/bin/bash"]
