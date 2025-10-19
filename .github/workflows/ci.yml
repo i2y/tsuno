@@ -41,7 +41,7 @@ jobs:
 
       - name: Run Python formatting check
         run: |
-          uv run black --check .
+          uv run ruff format --check .
 
       - name: Run type checking
         run: |

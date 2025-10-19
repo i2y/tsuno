@@ -8,8 +8,14 @@ from typing import Any
 
 from z import __version__
 
-from .config import (ConfigError, get_env_config, load_config_file,
-                     merge_configs, normalize_config, validate_config)
+from .config import (
+    ConfigError,
+    get_env_config,
+    load_config_file,
+    merge_configs,
+    normalize_config,
+    validate_config,
+)
 from .runner import run_application
 
 
@@ -161,9 +167,7 @@ For more information, visit: https://github.com/i2y/z
         help="Run server in background (not implemented yet)",
     )
     process_group.add_argument("-p", "--pid", dest="pid_file", help="PID file location")
-    process_group.add_argument(
-        "--chdir", help="Change to directory before loading application"
-    )
+    process_group.add_argument("--chdir", help="Change to directory before loading application")
 
     # Application loading
     app_group = parser.add_argument_group("Application Loading")
@@ -172,14 +176,15 @@ For more information, visit: https://github.com/i2y/z
         action="store_true",
         help="Treat application as a factory function that returns WSGI/ASGI app",
     )
-    app_group.add_argument(
-        "--app-dir", help="Add directory to PYTHONPATH for application import"
-    )
+    app_group.add_argument("--app-dir", help="Add directory to PYTHONPATH for application import")
     app_group.add_argument(
         "--mount",
         action="append",
         dest="mounts",
-        help="Mount additional application at path (format: 'path:module:attr'). Can be used multiple times.",
+        help=(
+            "Mount additional application at path (format: 'path:module:attr'). "
+            "Can be used multiple times."
+        ),
     )
 
     # Logging
@@ -284,9 +289,7 @@ For more information, visit: https://github.com/i2y/z
 
     # Configuration
     config_group = parser.add_argument_group("Configuration")
-    config_group.add_argument(
-        "-c", "--config", help="Configuration file path (Python format)"
-    )
+    config_group.add_argument("-c", "--config", help="Configuration file path (Python format)")
     config_group.add_argument(
         "--print-config",
         action="store_true",

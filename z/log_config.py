@@ -142,9 +142,7 @@ def load_log_config_file(config_file: str) -> dict[str, Any]:
             with open(config_file, "r") as f:
                 return yaml.safe_load(f)
         except ImportError:
-            raise ValueError(
-                "PyYAML is not installed. Install it with: pip install pyyaml"
-            )
+            raise ValueError("PyYAML is not installed. Install it with: pip install pyyaml")
 
     else:
         raise ValueError(

@@ -121,11 +121,7 @@ class AccessLogFormatter(logging.Formatter):
                 msg += f" {self.DIM}({duration:.2f}s){self.RESET}"
         else:
             # Plain format
-            msg = (
-                f"{client_addr} - "
-                f'"{method} {path} HTTP/{http_version}" '
-                f"{status_code}"
-            )
+            msg = f'{client_addr} - "{method} {path} HTTP/{http_version}" {status_code}'
 
             # Add duration if available
             if duration > 0:

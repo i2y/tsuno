@@ -26,9 +26,7 @@ class ASGIEventLoopWorker:
     - Requests are scheduled as tasks without blocking
     """
 
-    def __init__(
-        self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = False
-    ):
+    def __init__(self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = False):
         """
         Initialize the event loop worker.
 
@@ -82,9 +80,7 @@ class ASGIEventLoopWorker:
             # Run event loop forever (non-blocking architecture)
             self.loop.run_forever()
 
-        self.thread = threading.Thread(
-            target=run_loop, daemon=True, name="asgi-event-loop"
-        )
+        self.thread = threading.Thread(target=run_loop, daemon=True, name="asgi-event-loop")
         self.thread.start()
 
         # Wait for loop to be ready (with timeout)
@@ -118,9 +114,7 @@ class ASGIEventLoopWorker:
             request_receiver: Optional RequestReceiver for streaming request body (full-duplex)
         """
         # Create coroutine and schedule it in event loop
-        coro = self._handle_request_async(
-            sender, method, path, headers, body, request_receiver
-        )
+        coro = self._handle_request_async(sender, method, path, headers, body, request_receiver)
 
         # Schedule task
         self.loop.call_soon_threadsafe(self._schedule_task, coro)  # type: ignore
@@ -253,9 +247,7 @@ class ASGIEventLoopWorker:
                 """Receive chunks from RequestReceiver in async context."""
                 # Run blocking receive_chunk in executor
                 loop = asyncio.get_event_loop()
-                result = await loop.run_in_executor(
-                    None, request_receiver.receive_chunk
-                )
+                result = await loop.run_in_executor(None, request_receiver.receive_chunk)
 
                 if result is not None:
                     chunk_data, more_body = result
@@ -295,7 +287,12 @@ class ASGIEventLoopWorker:
 
         # Create send callable
         async def send(message: dict[str, Any]):
-            nonlocal response_started, response_sent, response_status, response_headers, response_body
+            nonlocal \
+                response_started, \
+                response_sent, \
+                response_status, \
+                response_headers, \
+                response_body
 
             match message["type"]:
                 case "http.response.start":
@@ -327,9 +324,7 @@ class ASGIEventLoopWorker:
 
                     # If sender supports streaming, send chunk immediately
                     if hasattr(sender, "is_streaming") and sender.is_streaming():
-                        if (
-                            body_chunk or not more_body
-                        ):  # Send if has data or last chunk
+                        if body_chunk or not more_body:  # Send if has data or last chunk
                             sender.send_chunk(body_chunk, more_body)
                         response_sent = not more_body
                     else:
@@ -423,27 +418,22 @@ class ASGIEventLoopWorker:
                         print("[ASGI Lifespan] Startup complete", file=sys.stderr)
                     case "lifespan.startup.failed":
                         error = message.get("message", "Unknown error")
-                        print(
-                            f"[ASGI Lifespan] Startup failed: {error}", file=sys.stderr
-                        )
+                        print(f"[ASGI Lifespan] Startup failed: {error}", file=sys.stderr)
                         self.lifespan_startup_complete.set()  # type: ignore
                     case "lifespan.shutdown.complete":
                         self.lifespan_shutdown = True
                         print("[ASGI Lifespan] Shutdown complete", file=sys.stderr)
                     case "lifespan.shutdown.failed":
                         error = message.get("message", "Unknown error")
-                        print(
-                            f"[ASGI Lifespan] Shutdown failed: {error}", file=sys.stderr
-                        )
+                        print(f"[ASGI Lifespan] Shutdown failed: {error}", file=sys.stderr)
 
             try:
                 # Run lifespan as background task
-                self.lifespan_task = asyncio.create_task(
-                    self.asgi_app(scope, receive, send)
-                )
+                self.lifespan_task = asyncio.create_task(self.asgi_app(scope, receive, send))
                 # Wait for startup to complete (with short timeout)
                 await asyncio.wait_for(
-                    self.lifespan_startup_complete.wait(), timeout=3.0  # type: ignore
+                    self.lifespan_startup_complete.wait(),
+                    timeout=3.0,  # type: ignore
                 )
             except asyncio.TimeoutError:
                 # App doesn't support lifespan or takes too long - that's ok
@@ -476,7 +466,8 @@ class ASGIEventLoopWorker:
             if self.lifespan_task and not self.lifespan_task.done():
                 try:
                     asyncio.run_coroutine_threadsafe(
-                        asyncio.wait_for(self.lifespan_task, timeout=5.0), self.loop  # type: ignore
+                        asyncio.wait_for(self.lifespan_task, timeout=5.0),
+                        self.loop,  # type: ignore
                     ).result(timeout=6.0)
                 except Exception as e:
                     print(f"[ASGI Lifespan] Shutdown error: {e}", file=sys.stderr)

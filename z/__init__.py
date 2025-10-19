@@ -42,9 +42,7 @@ def run(
     # Worker Configuration
     workers: int | None = None,
     worker_class: str = "sync",  # Gunicorn: sync/async/gthread/gevent/eventlet
-    threads: (
-        int | None
-    ) = None,  # Gunicorn: threads per worker (alias for blocking_threads)
+    threads: int | None = None,  # Gunicorn: threads per worker (alias for blocking_threads)
     worker_connections: int = 1000,  # Gunicorn: max simultaneous clients per worker
     # z-specific: Performance Tuning
     blocking_threads: int = 2,
@@ -304,8 +302,7 @@ def run(
 
     # Setup logging configuration
     if log_config is not None:
-        from .log_config import (load_log_config_file,  # type: ignore
-                                 setup_logging)
+        from .log_config import load_log_config_file, setup_logging  # type: ignore
 
         if isinstance(log_config, dict):
             setup_logging(log_config)  # type: ignore

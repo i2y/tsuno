@@ -174,7 +174,8 @@ def _drop_privileges(
         raise RuntimeError("Failed to drop root privileges")
 
     print(
-        f"[Worker {os.getpid()}] Privileges dropped successfully (UID={os.getuid()}, GID={os.getgid()})",
+        f"[Worker {os.getpid()}] Privileges dropped successfully "
+        f"(UID={os.getuid()}, GID={os.getgid()})",
         file=sys.stderr,
         flush=True,
     )
@@ -268,17 +269,15 @@ def _worker_process(
                 if current_count >= request_limit and not should_exit:
                     should_exit = True
                     print(
-                        f"[Worker {worker_id}] Reached request limit ({current_count}/{request_limit}). "
-                        f"Will exit after this request...",
+                        f"[Worker {worker_id}] Reached request limit "
+                        f"({current_count}/{request_limit}). Will exit after this request...",
                         file=sys.stderr,
                         flush=True,
                     )
 
         # Handle the request normally
         try:
-            dispatcher.handle_request(
-                sender, method, path, headers, body, request_receiver
-            )
+            dispatcher.handle_request(sender, method, path, headers, body, request_receiver)
         finally:
             # Mark worker as IDLE (request completed) - set to far future
             if last_activity is not None:
@@ -384,7 +383,8 @@ def serve(
         blocking_threads: Number of blocking threads per worker (default: 2)
         tokio_threads: Number of Tokio I/O threads (default: 1, optimal for HTTP/1.1)
                        Set to 3 for HTTP/2-heavy workloads
-                       Priority: tokio_threads parameter > TOKIO_WORKER_THREADS env var > default (1)
+                       Priority: tokio_threads parameter > TOKIO_WORKER_THREADS env var
+                       > default (1)
         enable_worker_restart: Enable automatic worker restart on crash (default: True)
                                Disable for debugging to prevent masking crashes
         max_restarts_per_worker: Maximum number of restarts per worker (default: 5)
@@ -450,9 +450,7 @@ def serve(
                     )
                     os.remove(pid_file)
             except (ValueError, IOError) as e:
-                print(
-                    f"Warning: Could not read PID file {pid_file}: {e}", file=sys.stderr
-                )
+                print(f"Warning: Could not read PID file {pid_file}: {e}", file=sys.stderr)
 
         # Write current PID
         try:
@@ -521,9 +519,7 @@ def serve(
 
     # Set multiprocessing start method
     try:
-        multiprocessing.set_start_method(
-            "fork" if sys.platform != "win32" else "spawn", force=True
-        )
+        multiprocessing.set_start_method("fork" if sys.platform != "win32" else "spawn", force=True)
     except RuntimeError:
         # Start method already set, ignore
         pass
@@ -569,9 +565,7 @@ def serve(
         )
         p.start()
         worker_processes.append(p)
-        print(
-            f"[Main] Started worker {i} with PID {p.pid}", file=sys.stderr, flush=True
-        )
+        print(f"[Main] Started worker {i} with PID {p.pid}", file=sys.stderr, flush=True)
 
     # Print server info
     print("\n" + "=" * 60, file=sys.stderr)
@@ -675,13 +669,9 @@ def serve(
                 new_request_counts = []
                 for i in range(workers):
                     # Initialize to far future so idle workers don't timeout immediately
-                    last_activity = (
-                        Value(c_double, time.time() + 86400) if timeout > 0 else None
-                    )
+                    last_activity = Value(c_double, time.time() + 86400) if timeout > 0 else None
                     new_last_activity.append(last_activity)
-                    request_count = (
-                        Value(c_int, 0) if max_requests is not None else None
-                    )
+                    request_count = Value(c_int, 0) if max_requests is not None else None
                     new_request_counts.append(request_count)
 
                 # Start new workers
@@ -731,7 +721,8 @@ def serve(
                     p.join(timeout=graceful_timeout)
                     if p.is_alive():
                         print(
-                            f"[Main] Old worker {i} (PID {p.pid}) did not exit gracefully, killing...",
+                            f"[Main] Old worker {i} (PID {p.pid}) "
+                            f"did not exit gracefully, killing...",
                             file=sys.stderr,
                             flush=True,
                         )
@@ -760,14 +751,12 @@ def serve(
                     # Only restart on abnormal exit (non-zero exit code)
                     # Exit code 0 means normal termination (e.g., SIGTERM, graceful shutdown)
                     if exit_code != 0:
-                        if (
-                            enable_worker_restart
-                            and restart_counts[i] < max_restarts_per_worker
-                        ):
+                        if enable_worker_restart and restart_counts[i] < max_restarts_per_worker:
                             # Worker crashed, restart it
                             restart_counts[i] += 1
                             print(
-                                f"[Main] Worker {i} (PID {process.pid}) crashed with exit code {exit_code}. "
+                                f"[Main] Worker {i} (PID {process.pid}) "
+                                f"crashed with exit code {exit_code}. "
                                 f"Restarting ({restart_counts[i]}/{max_restarts_per_worker})...",
                                 file=sys.stderr,
                                 flush=True,
@@ -775,8 +764,10 @@ def serve(
                         else:
                             # Max restarts reached or restart disabled
                             print(
-                                f"[Main] Worker {i} (PID {process.pid}) crashed with exit code {exit_code}. "
-                                f"Not restarting (restarts: {restart_counts[i]}/{max_restarts_per_worker}).",
+                                f"[Main] Worker {i} (PID {process.pid}) "
+                                f"crashed with exit code {exit_code}. "
+                                f"Not restarting "
+                                f"(restarts: {restart_counts[i]}/{max_restarts_per_worker}).",
                                 file=sys.stderr,
                                 flush=True,
                             )
@@ -795,9 +786,7 @@ def serve(
                     new_last_activity = (
                         Value(c_double, time.time() + 86400) if timeout > 0 else None
                     )
-                    new_request_count = (
-                        Value(c_int, 0) if max_requests is not None else None
-                    )
+                    new_request_count = Value(c_int, 0) if max_requests is not None else None
                     worker_last_activity[i] = new_last_activity
                     worker_request_counts[i] = new_request_count
 

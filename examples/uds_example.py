@@ -38,12 +38,12 @@ def application(environ, start_response):
     response = f"""Hello from z via Unix Domain Socket!
 
 Request Details:
-- Method: {environ['REQUEST_METHOD']}
-- Path: {environ['PATH_INFO']}
-- Query String: {environ.get('QUERY_STRING', '')}
-- Server Protocol: {environ['SERVER_PROTOCOL']}
+- Method: {environ["REQUEST_METHOD"]}
+- Path: {environ["PATH_INFO"]}
+- Query String: {environ.get("QUERY_STRING", "")}
+- Server Protocol: {environ["SERVER_PROTOCOL"]}
 
-Unix Socket Path: {environ.get('SERVER_NAME', 'N/A')}
+Unix Socket Path: {environ.get("SERVER_NAME", "N/A")}
 """
     return [response.encode("utf-8")]
 

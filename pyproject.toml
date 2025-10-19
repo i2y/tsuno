@@ -99,3 +99,21 @@ python-source = "."
 manifest-path = "pyhtransport/Cargo.toml"
 # Include the z Python package
 include = ["z/**/*.py", "z/**/*.pyi"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".venv", "build", "target"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # E: pycodestyle errors, F: pyflakes, I: isort
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["z", "pyhtransport"]

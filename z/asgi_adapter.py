@@ -1,7 +1,8 @@
 """
 ASGI adapter for serving ASGI applications with the z server.
 
-This module provides compatibility with ASGI applications (FastAPI, Starlette, Quart, connect-python, etc.).
+This module provides compatibility with ASGI applications
+(FastAPI, Starlette, Quart, connect-python, etc.).
 
 This adapter uses a dedicated event loop worker architecture,
 allowing concurrent request processing without blocking the event loop.
@@ -21,9 +22,7 @@ class ASGIAdapter:
     in a dedicated event loop thread.
     """
 
-    def __init__(
-        self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = False
-    ):
+    def __init__(self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = False):
         """
         Initialize the ASGI adapter.
 
@@ -37,9 +36,7 @@ class ASGIAdapter:
         self.use_uvloop = use_uvloop
 
         # Create dedicated event loop worker
-        self.worker = ASGIEventLoopWorker(
-            asgi_app, root_path=root_path, use_uvloop=use_uvloop
-        )
+        self.worker = ASGIEventLoopWorker(asgi_app, root_path=root_path, use_uvloop=use_uvloop)
 
         print(
             "[ASGI] Initialized with dedicated event loop worker",

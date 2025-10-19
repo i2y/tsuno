@@ -19,9 +19,7 @@ class ApplicationLoadError(Exception):
     pass
 
 
-def import_app(
-    module_str: str, factory: bool = False, app_dir: str | None = None
-) -> Any:
+def import_app(module_str: str, factory: bool = False, app_dir: str | None = None) -> Any:
     """
     Import application from module string.
 
@@ -47,9 +45,7 @@ def import_app(
         if not app_path.exists():
             raise ApplicationLoadError(f"Application directory not found: {app_dir}")
         if not app_path.is_dir():
-            raise ApplicationLoadError(
-                f"Application directory is not a directory: {app_dir}"
-            )
+            raise ApplicationLoadError(f"Application directory is not a directory: {app_dir}")
         sys.path.insert(0, str(app_path))
 
     # Parse module string
@@ -64,18 +60,14 @@ def import_app(
     try:
         module = importlib.import_module(module_name)
     except ImportError as e:
-        raise ApplicationLoadError(
-            f"Could not import module '{module_name}': {e}"
-        ) from e
+        raise ApplicationLoadError(f"Could not import module '{module_name}': {e}") from e
 
     # Get the application object
     if attr_name:
         try:
             app = getattr(module, attr_name)
         except AttributeError:
-            raise ApplicationLoadError(
-                f"Module '{module_name}' has no attribute '{attr_name}'"
-            )
+            raise ApplicationLoadError(f"Module '{module_name}' has no attribute '{attr_name}'")
     else:
         # Try common names
         for name in ["application", "app", "create_app"]:
@@ -132,8 +124,7 @@ def parse_mount_spec(mount_spec: str) -> tuple[str, str]:
 
     if not path.startswith("/"):
         raise ValueError(
-            f"Mount path must start with '/': '{path}'. "
-            f"Example: '/api:api.app:application'"
+            f"Mount path must start with '/': '{path}'. Example: '/api:api.app:application'"
         )
 
     return path, rest
@@ -159,9 +150,7 @@ def validate_bind_address(bind: str) -> tuple[str, int]:
         ('localhost', 3000)
     """
     if ":" not in bind:
-        raise ValueError(
-            f"Invalid bind address: '{bind}'. Expected format: 'host:port'"
-        )
+        raise ValueError(f"Invalid bind address: '{bind}'. Expected format: 'host:port'")
 
     host, _, port_str = bind.partition(":")
 

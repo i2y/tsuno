@@ -84,9 +84,7 @@ class Reloader:
             "*.egg-info/*",
         ]
 
-        logger.info(
-            f"Watching for file changes in: {', '.join(str(d) for d in self.watch_dirs)}"
-        )
+        logger.info(f"Watching for file changes in: {', '.join(str(d) for d in self.watch_dirs)}")
 
     def startup(self) -> None:
         """Start the server process."""

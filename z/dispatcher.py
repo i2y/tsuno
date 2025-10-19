@@ -118,9 +118,7 @@ class Dispatcher:
             WSGIAdapter or ASGIAdapter instance
         """
         if hasattr(app, "routes"):  # FastAPI/Starlette
-            return ASGIAdapter(
-                app, root_path=self.root_path, use_uvloop=self.use_uvloop
-            )
+            return ASGIAdapter(app, root_path=self.root_path, use_uvloop=self.use_uvloop)
         elif hasattr(app, "wsgi_app"):  # Flask
             return WSGIAdapter(app)
         else:
@@ -132,16 +130,12 @@ class Dispatcher:
                     or inspect.isasyncgenfunction(app)
                     or inspect.iscoroutinefunction(app.__call__)
                 ):
-                    return ASGIAdapter(
-                        app, root_path=self.root_path, use_uvloop=self.use_uvloop
-                    )
+                    return ASGIAdapter(app, root_path=self.root_path, use_uvloop=self.use_uvloop)
                 else:
                     return WSGIAdapter(app)
             else:
                 # Default to ASGI
-                return ASGIAdapter(
-                    app, root_path=self.root_path, use_uvloop=self.use_uvloop
-                )
+                return ASGIAdapter(app, root_path=self.root_path, use_uvloop=self.use_uvloop)
 
     def handle_request(
         self,
@@ -229,9 +223,7 @@ class Dispatcher:
                 )
             else:
                 # No app found - send 404
-                sender.send_response(
-                    404, [("Content-Type", "text/plain")], b"404 Not Found", None
-                )
+                sender.send_response(404, [("Content-Type", "text/plain")], b"404 Not Found", None)
         finally:
             # Log access only when access log is enabled
             if self.access_log_enabled and start_time is not None:  # type: ignore

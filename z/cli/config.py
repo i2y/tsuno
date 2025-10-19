@@ -187,9 +187,7 @@ def load_config_file(config_path: str) -> dict[str, Any]:
                 with open(cp, "rb") as f:
                     first_bytes = f.read(100)
                     # Check for TOML-like syntax
-                    if b"[" in first_bytes or (
-                        b"=" in first_bytes and b"\n" in first_bytes
-                    ):
+                    if b"[" in first_bytes or (b"=" in first_bytes and b"\n" in first_bytes):
                         # Try TOML first
                         try:
                             return load_toml_config_file(str(cp))
@@ -332,9 +330,7 @@ def validate_config(config: dict[str, Any]) -> None:
     if "tokio_threads" in config:
         tokio_threads = config["tokio_threads"]
         if not isinstance(tokio_threads, int) or tokio_threads < 1:
-            raise ConfigError(
-                f"tokio_threads must be a positive integer, got: {tokio_threads}"
-            )
+            raise ConfigError(f"tokio_threads must be a positive integer, got: {tokio_threads}")
 
     # Validate timeout
     if "timeout" in config:
@@ -371,18 +367,14 @@ def validate_config(config: dict[str, Any]) -> None:
     if "log_format" in config:
         log_format = config["log_format"].lower()
         if log_format not in ["text", "json"]:
-            raise ConfigError(
-                f"log_format must be 'text' or 'json', got: {config['log_format']}"
-            )
+            raise ConfigError(f"log_format must be 'text' or 'json', got: {config['log_format']}")
 
     # Validate interface (worker_class)
     if "interface" in config:
         interface = config["interface"]
         valid_interfaces = ["wsgi", "asgi", "auto"]
         if interface not in valid_interfaces:
-            raise ConfigError(
-                f"interface must be one of {valid_interfaces}, got: {interface}"
-            )
+            raise ConfigError(f"interface must be one of {valid_interfaces}, got: {interface}")
 
     # Validate bind address
     if "bind" in config:

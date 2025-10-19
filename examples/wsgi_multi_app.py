@@ -5,7 +5,6 @@ Example of mounting multiple WSGI applications with the high-performance server.
 This demonstrates how to serve multiple Flask apps at different paths.
 """
 
-
 from flask import Flask, jsonify, request
 
 # Create main application
