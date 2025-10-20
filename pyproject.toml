@@ -98,7 +98,7 @@ build-backend = "maturin"
 python-source = "."
 manifest-path = "pyhtransport/Cargo.toml"
 # Include the tsuno Python package
-include = ["tsuno/**/*.py", "tsuno/**/*.pyi"]
+include = ["tsuno/**/*.py", "tsuno/**/*.pyi", "LICENSE", "README.md"]
 
 [tool.ruff]
 line-length = 120
