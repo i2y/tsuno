@@ -1,5 +1,5 @@
 """
-Utility functions for the z CLI.
+Utility functions for the tsuno CLI.
 
 This module provides helpers for:
 - Application importing and validation

@@ -40,8 +40,8 @@ EOF
 echo "SINGLE WORKER BENCHMARKS (1w×1t)"
 echo ""
 
-# z single worker
-echo "1. Benchmarking z (1 worker × 1 thread)..."
+# Tsuno single worker
+echo "1. Benchmarking tsuno (1 worker × 1 thread)..."
 export TOKIO_WORKER_THREADS=1
 export LOG_LEVEL=ERROR
 python benchmarks/simple_asgi_app.py 8000 1 1 &
@@ -104,8 +104,8 @@ echo ""
 echo "MULTI WORKER BENCHMARKS (7w×2t)"
 echo ""
 
-# z multi worker
-echo "1. Benchmarking z (7 workers × 2 threads)..."
+# Tsuno multi worker
+echo "1. Benchmarking tsuno (7 workers × 2 threads)..."
 export TOKIO_WORKER_THREADS=1
 export LOG_LEVEL=ERROR
 python benchmarks/simple_asgi_app.py 8000 7 2 &
@@ -174,7 +174,7 @@ echo ""
 
 echo "--- SINGLE WORKER (1w×1t) ---"
 echo ""
-echo "z:"
+echo "tsuno:"
 grep "Requests/sec" /tmp/result_z_1w.txt
 grep "99%" /tmp/result_z_1w.txt | head -1
 echo ""
@@ -196,7 +196,7 @@ echo ""
 
 echo "--- MULTI WORKER (7w×2t) ---"
 echo ""
-echo "z:"
+echo "tsuno:"
 grep "Requests/sec" /tmp/result_z_7w.txt
 grep "99%" /tmp/result_z_7w.txt | head -1
 echo ""

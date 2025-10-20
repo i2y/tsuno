@@ -4,7 +4,7 @@ Gunicorn-compatible server hooks system.
 Provides lifecycle hooks at various server and worker stages,
 enabling users to customize server behavior without modifying code.
 
-Example usage in configuration file (z.conf.py):
+Example usage in configuration file (tsuno.conf.py):
 
     def when_ready(server):
         print(f"Server ready on {server['address']}")

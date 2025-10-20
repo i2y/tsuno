@@ -13,13 +13,13 @@ echo ""
 
 # Test 1: Import test
 echo "Test 1: Import test"
-python -c "import tsuno; print('✅ z imported successfully')" || exit 1
+python -c "import tsuno; print('✅ tsuno imported successfully')" || exit 1
 python -c "import pyhtransport; print('✅ pyhtransport imported successfully')" || exit 1
 echo ""
 
 # Test 2: CLI test
 echo "Test 2: CLI test"
-z --help > /dev/null && echo "✅ CLI works" || exit 1
+tsuno --help > /dev/null && echo "✅ CLI works" || exit 1
 echo ""
 
 # Test 3: Simple ASGI app (single worker)

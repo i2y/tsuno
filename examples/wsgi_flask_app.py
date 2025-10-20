@@ -60,7 +60,7 @@ def benchmark():
 @app.route("/health")
 def health():
     """Health check endpoint."""
-    return jsonify({"status": "healthy", "server": "z-wsgi"})
+    return jsonify({"status": "healthy", "server": "tsuno-wsgi"})
 
 
 @app.route("/headers")

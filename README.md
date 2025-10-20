@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
 See [`examples/`](examples/) for complete working examples.
 
-## What Makes z Different
+## What Makes Tsuno Different
 
 - **Mixed Protocol Serving**: Serve WSGI and ASGI apps simultaneously on the same server ([example](examples/mixed_wsgi_asgi.py))
 - **High Performance**: Powered by Tokio and hyper
@@ -72,12 +72,12 @@ Complete working examples in the [`examples/`](examples/) directory:
 |---------|-------------|
 | **[wsgi_flask_app.py](examples/wsgi_flask_app.py)** | Flask WSGI application |
 | **[asgi_fastapi_app.py](examples/asgi_fastapi_app.py)** | FastAPI ASGI application |
-| **[mixed_wsgi_asgi.py](examples/mixed_wsgi_asgi.py)** | **Mixed WSGI + ASGI serving** (unique to z!) |
+| **[mixed_wsgi_asgi.py](examples/mixed_wsgi_asgi.py)** | **Mixed WSGI + ASGI serving** (unique to Tsuno!) |
 | **[wsgi_multi_app.py](examples/wsgi_multi_app.py)** | Multiple Flask apps on different paths |
 | **[asgi_multi_app.py](examples/asgi_multi_app.py)** | Multiple FastAPI apps on different paths |
 | **[uds_example.py](examples/uds_example.py)** | Unix Domain Socket server |
 | **[lifespan_test.py](examples/lifespan_test.py)** | ASGI Lifespan events demo |
-| **[z.toml](examples/z.toml)** | TOML configuration example |
+| **[tsuno.toml](examples/tsuno.toml)** | TOML configuration example |
 
 ## Configuration
 
@@ -85,23 +85,23 @@ Complete working examples in the [`examples/`](examples/) directory:
 
 ```bash
 # Basic
-z myapp:app --bind 0.0.0.0:8000 --workers 4
+tsuno myapp:app --bind 0.0.0.0:8000 --workers 4
 
 # With auto-reload (development)
-z myapp:app --reload
+tsuno myapp:app --reload
 
 # With Unix domain socket
-z myapp:app --uds /tmp/z.sock
+tsuno myapp:app --uds /tmp/tsuno.sock
 
 # With configuration file
-z myapp:app -c z.toml
+tsuno myapp:app -c tsuno.toml
 ```
 
 ### Configuration File
 
 **Python format** (Gunicorn-compatible):
 ```python
-# z.conf.py
+# tsuno.conf.py
 bind = "0.0.0.0:8000"
 workers = 4
 threads = 2
@@ -110,7 +110,7 @@ log_level = "info"
 
 **TOML format**:
 ```toml
-# z.toml
+# tsuno.toml
 bind = "0.0.0.0:8000"
 workers = 4
 threads = 2
@@ -145,10 +145,10 @@ run(
 
 ```bash
 # Start with PID file
-z myapp:app --pid /var/run/z.pid
+tsuno myapp:app --pid /var/run/tsuno.pid
 
 # Graceful reload (no downtime)
-kill -HUP $(cat /var/run/z.pid)
+kill -HUP $(cat /var/run/tsuno.pid)
 ```
 
 ### Logging
@@ -170,7 +170,7 @@ Please see [benchmarks/comparison.md](benchmarks/comparison.md) for detailed res
 gunicorn myapp:app --workers 4 --bind 0.0.0.0:8000
 
 # After (same syntax!)
-z myapp:app --workers 4 --bind 0.0.0.0:8000
+tsuno myapp:app --workers 4 --bind 0.0.0.0:8000
 ```
 
 ### From Uvicorn

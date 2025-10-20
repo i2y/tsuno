@@ -117,7 +117,7 @@ max_restarts_per_worker = 5
 worker_connections = 1000
 
 # Custom server header (not fully implemented)
-# server_header = "z/0.1.0"
+# server_header = "tsuno/0.1.0"
 
 # Include date header in responses (not fully implemented)
 # date_header = true

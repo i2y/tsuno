@@ -1,5 +1,5 @@
 """
-Access logging functionality for z.
+Access logging functionality for tsuno.
 
 Provides Uvicorn-compatible access logging with customizable formats.
 """
@@ -9,7 +9,7 @@ import sys
 
 # Optional no longer needed (using | None syntax)
 
-logger = logging.getLogger("z.access")
+logger = logging.getLogger("tsuno.access")
 
 
 class AccessLogFormatter(logging.Formatter):
@@ -137,7 +137,7 @@ class AccessLogger:
 
     def __init__(
         self,
-        logger_name: str = "z.access",
+        logger_name: str = "tsuno.access",
         format_string: str | None = None,
         use_colors: bool = True,
     ):
@@ -230,7 +230,7 @@ def setup_access_logging(
         use_colors = sys.stdout.isatty()
 
     if _access_logger is None:
-        logger = logging.getLogger("z.access")
+        logger = logging.getLogger("tsuno.access")
 
         # Clear existing handlers
         logger.handlers.clear()

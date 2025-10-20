@@ -86,7 +86,7 @@ async def benchmark(name: Optional[str] = None, request: Optional[HelloRequest] 
     return {
         "message": f"Hello, {name}!",
         "timestamp": time.time(),
-        "server": "z-asgi",
+        "server": "tsuno-asgi",
     }
 
 
@@ -95,7 +95,7 @@ async def health_check():
     """Health check endpoint."""
     return {
         "status": "healthy",
-        "server": "z-asgi",
+        "server": "tsuno-asgi",
         "timestamp": time.time(),
     }
 

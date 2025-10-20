@@ -391,7 +391,7 @@ def serve(
                                  Prevents infinite restart loops on persistent crashes
         graceful_timeout: Seconds to wait for workers to finish requests on shutdown (default: 30)
         pid_file: Path to PID file for process management (default: None)
-                  Example: "/var/run/z.pid"
+                  Example: "/var/run/tsuno.pid"
         log_level: Log level (DEBUG, INFO, WARNING, ERROR). Can be overridden by LOG_LEVEL env var.
         log_format: Log format ("text" or "json"). Can be overridden by LOG_FORMAT env var.
 
@@ -400,7 +400,7 @@ def serve(
         SIGHUP: Graceful reload (start new workers, gracefully shutdown old workers)
 
     Example:
-        from z import serve
+        from tsuno import serve
         from myapp import grpc_service, flask_app, fastapi_app
 
         # Development (single process, no auto-restart)
@@ -957,7 +957,7 @@ def serve_uds(
 
     Args:
         apps: Dictionary mapping path prefixes to applications
-        socket_path: Unix socket file path (e.g., "/tmp/z.sock")
+        socket_path: Unix socket file path (e.g., "/tmp/tsuno.sock")
         blocking_threads: Number of blocking threads per worker (default: 2)
         tokio_threads: Number of Tokio I/O threads (default: 1)
         log_level: Log level (DEBUG, INFO, WARNING, ERROR)
@@ -965,7 +965,7 @@ def serve_uds(
 
     Example:
         # Unix domain socket
-        serve_uds({'/': app}, socket_path="/tmp/z.sock", blocking_threads=2)
+        serve_uds({'/': app}, socket_path="/tmp/tsuno.sock", blocking_threads=2)
     """
     # Set Tokio worker threads if specified
     if tokio_threads is not None:

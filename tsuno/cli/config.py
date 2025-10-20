@@ -1,5 +1,5 @@
 """
-Configuration handling for z CLI.
+Configuration handling for tsuno CLI.
 
 This module handles loading and merging configuration from:
 1. Default values
@@ -36,7 +36,7 @@ def load_python_config_file(config_path: str) -> dict[str, Any]:
     Raises:
         ConfigError: If config file cannot be loaded
 
-    Example config file (z.conf.py):
+    Example config file (tsuno.conf.py):
         bind = "0.0.0.0:8000"
         workers = 4
         threads = 2
@@ -110,7 +110,7 @@ def load_toml_config_file(config_path: str) -> dict[str, Any]:
     Raises:
         ConfigError: If config file cannot be loaded
 
-    Example config file (z.toml):
+    Example config file (tsuno.toml):
         bind = "0.0.0.0:8000"
         workers = 4
         threads = 2
@@ -165,10 +165,10 @@ def load_config_file(config_path: str) -> dict[str, Any]:
 
     Example usage:
         # Python format
-        config = load_config_file("z.conf.py")
+        config = load_config_file("tsuno.conf.py")
 
         # TOML format
-        config = load_config_file("z.toml")
+        config = load_config_file("tsuno.toml")
     """
     cp = Path(config_path)
 

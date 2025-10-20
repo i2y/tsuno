@@ -1,5 +1,5 @@
 """
-z command-line interface module.
+tsuno command-line interface module.
 """
 
 from .main import main

@@ -42,7 +42,7 @@ server = []
 
 # uvloop for application-level I/O acceleration
 # Note: Only benefits apps with external I/O (databases, APIs, file I/O)
-# z's Rust transport layer does NOT use uvloop
+# tsuno's Rust transport layer does NOT use uvloop
 uvloop = [
     "uvloop>=0.21.0; platform_system != 'Windows' and python_version < '3.14'",
 ]

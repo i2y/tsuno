@@ -1,8 +1,8 @@
 """
-Application runner for z CLI.
+Application runner for tsuno CLI.
 
 This module handles loading and running applications with
-the z server.
+the Tsuno server.
 """
 
 import sys
@@ -38,8 +38,8 @@ def run_application(
 
     Args:
         app_module: Application module string (e.g., "myapp:application")
-        bind: Bind address (e.g., "0.0.0.0:8000" or "unix:/tmp/z.sock")
-        uds: Unix domain socket path (e.g., "/tmp/z.sock")
+        bind: Bind address (e.g., "0.0.0.0:8000" or "unix:/tmp/tsuno.sock")
+        uds: Unix domain socket path (e.g., "/tmp/tsuno.sock")
         fd: File descriptor for systemd socket activation
         workers: Number of worker processes (auto-detect if None)
         threads: Blocking threads per worker

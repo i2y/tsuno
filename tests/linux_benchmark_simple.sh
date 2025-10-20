@@ -10,8 +10,8 @@ echo "Hardware: $(nproc) CPUs"
 echo "Kernel: $(uname -r)"
 echo ""
 
-# z single worker benchmark
-echo "Benchmarking z (1 worker × 1 thread)..."
+# Tsuno single worker benchmark
+echo "Benchmarking tsuno (1 worker × 1 thread)..."
 export TOKIO_WORKER_THREADS=1
 export LOG_LEVEL=ERROR
 python benchmarks/simple_asgi_app.py 8000 1 1 &
@@ -22,10 +22,10 @@ kill $PID
 sleep 3
 echo ""
 
-# z multi worker benchmark
+# Tsuno multi worker benchmark
 WORKERS=$(( $(nproc) / 2 ))
 [ $WORKERS -lt 2 ] && WORKERS=2
-echo "Benchmarking z ($WORKERS workers × 2 threads)..."
+echo "Benchmarking tsuno ($WORKERS workers × 2 threads)..."
 export TOKIO_WORKER_THREADS=1
 export LOG_LEVEL=ERROR
 python benchmarks/simple_asgi_app.py 8000 $WORKERS 2 &

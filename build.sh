@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Building z..."
+echo "Building tsuno..."
 
 # Source cargo environment
 source ~/.cargo/env

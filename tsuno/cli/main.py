@@ -1,5 +1,5 @@
 """
-Main entry point for z CLI.
+Main entry point for tsuno CLI.
 """
 
 import argparse
@@ -27,27 +27,27 @@ def create_parser() -> argparse.ArgumentParser:
         Configured ArgumentParser instance
     """
     parser = argparse.ArgumentParser(
-        prog="z",
+        prog="tsuno",
         description="Z - High-performance WSGI/ASGI server with Rust transport",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   # Run a Flask application
-  z myapp:app --bind 0.0.0.0:8000 --workers 4
+  tsuno myapp:app --bind 0.0.0.0:8000 --workers 4
 
   # Run a FastAPI application with auto-reload
-  z main:app --reload
+  tsuno main:app --reload
 
   # Use a factory function
-  z myapp:create_app --factory
+  tsuno myapp:create_app --factory
 
   # Mount multiple applications
-  z main:app --mount /api:api:app --mount /admin:admin:app
+  tsuno main:app --mount /api:api:app --mount /admin:admin:app
 
   # Use a configuration file
-  z myapp:app -c z.conf.py
+  tsuno myapp:app -c tsuno.conf.py
 
-For more information, visit: https://github.com/i2y/z
+For more information, visit: https://github.com/i2y/tsuno
         """,
     )
 
@@ -67,7 +67,7 @@ For more information, visit: https://github.com/i2y/z
     )
     server_group.add_argument(
         "--uds",
-        help="Unix domain socket path (e.g., /tmp/z.sock)",
+        help="Unix domain socket path (e.g., /tmp/tsuno.sock)",
     )
     server_group.add_argument(
         "--fd",

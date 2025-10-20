@@ -67,7 +67,7 @@ class ASGIEventLoopWorker:
 
                     warnings.warn(
                         "uvloop requested but not installed. "
-                        "Install with: pip install z[uvloop]\n"
+                        "Install with: pip install tsuno[uvloop]\n"
                         "Falling back to standard asyncio.",
                         RuntimeWarning,
                         stacklevel=2,

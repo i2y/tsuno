@@ -1,5 +1,5 @@
 """
-z: WSGI/ASGI server powered by Rust
+tsuno: WSGI/ASGI server powered by Rust
 """
 
 from typing import Any, Callable
@@ -44,10 +44,10 @@ def run(
     worker_class: str = "sync",  # Gunicorn: sync/async/gthread/gevent/eventlet
     threads: int | None = None,  # Gunicorn: threads per worker (alias for blocking_threads)
     worker_connections: int = 1000,  # Gunicorn: max simultaneous clients per worker
-    # z-specific: Performance Tuning
+    # tsuno-specific: Performance Tuning
     blocking_threads: int = 2,
     tokio_threads: int | None = None,
-    # Worker Management (z + Gunicorn)
+    # Worker Management (tsuno + Gunicorn)
     enable_worker_restart: bool = True,
     max_restarts_per_worker: int = 5,
     timeout: int = 30,
@@ -105,9 +105,9 @@ def run(
     ssl_cert_reqs: int = 0,  # Uvicorn: client cert requirements
     ssl_ca_certs: str | None = None,  # Uvicorn: CA certs file
     ssl_ciphers: str = "TLSv1",  # Uvicorn: allowed cipher suites
-    # Protocol Options (Uvicorn) - Most not applicable to z
+    # Protocol Options (Uvicorn) - Most not applicable to tsuno
     loop: str = "auto",  # Uvicorn: event loop (asyncio/uvloop) - NOT APPLICABLE (using Rust)
-    use_uvloop: bool = False,  # z: Enable uvloop for application-level I/O (ASGI only)
+    use_uvloop: bool = False,  # tsuno: Enable uvloop for application-level I/O (ASGI only)
     http: str = "auto",  # Uvicorn: HTTP impl (h11/httptools) - NOT APPLICABLE (using Hyper)
     ws: str = "auto",  # Uvicorn: WebSocket impl - NOT APPLICABLE
     ws_max_size: int = 16777216,  # Uvicorn: max WS message size - NOT APPLICABLE
@@ -123,22 +123,22 @@ def run(
     **kwargs: Any,
 ):
     """
-    Run WSGI/ASGI application with z server.
+    Run WSGI/ASGI application with Tsuno server.
 
-    This is the unified API that accepts parameters from Uvicorn, Gunicorn, and z-specific options.
+    This is the unified API that accepts parameters from Uvicorn, Gunicorn, and tsuno-specific options.
 
     Args:
         app: Application instance, import string, or dictionary of apps
         host: Host to bind to (default: "127.0.0.1")
         port: Port to bind to (default: 8000)
         bind: Gunicorn-style bind address (alternative to host:port, e.g., "0.0.0.0:8000")
-        uds: Unix domain socket path (e.g., "/tmp/z.sock")
+        uds: Unix domain socket path (e.g., "/tmp/tsuno.sock")
         fd: File descriptor for systemd socket activation
         workers: Number of worker processes (default: auto-detect)
-        blocking_threads: Python blocking threads per worker (z-specific, default: 2)
-        tokio_threads: Tokio I/O threads (z-specific, default: 1, optimal for HTTP/1.1)
-        enable_worker_restart: Auto-restart crashed workers (z-specific, default: True)
-        max_restarts_per_worker: Max restart attempts (z-specific, default: 5)
+        blocking_threads: Python blocking threads per worker (tsuno-specific, default: 2)
+        tokio_threads: Tokio I/O threads (tsuno-specific, default: 1, optimal for HTTP/1.1)
+        enable_worker_restart: Auto-restart crashed workers (tsuno-specific, default: True)
+        max_restarts_per_worker: Max restart attempts (tsuno-specific, default: 5)
         timeout: Worker timeout in seconds (Gunicorn-compatible, default: 30)
         graceful_timeout: Graceful shutdown timeout (default: 30)
         pid_file: PID file path for process management
@@ -165,11 +165,11 @@ def run(
         # Gunicorn-style with bind
         run(app, bind="0.0.0.0:8000", workers=4)
 
-        # z-specific performance tuning
+        # tsuno-specific performance tuning
         run(app, bind="0.0.0.0:8000", blocking_threads=2, tokio_threads=3)
 
         # Unix domain socket
-        run(app, uds="/tmp/z.sock")
+        run(app, uds="/tmp/tsuno.sock")
 
         # File descriptor (systemd)
         run(app, fd=3)
@@ -178,7 +178,7 @@ def run(
         run(app, reload=True, reload_dirs=["./myapp"])
 
         # Production with PID file
-        run(app, bind="0.0.0.0:8000", workers=4, pid_file="/var/run/z.pid")
+        run(app, bind="0.0.0.0:8000", workers=4, pid_file="/var/run/tsuno.pid")
     """
     import warnings
 
@@ -252,7 +252,7 @@ def run(
     for param, is_custom in not_applicable_params.items():
         if is_custom:
             warnings.warn(
-                f"Parameter '{param}' is not applicable to z (uses Rust/Hyper transport). "
+                f"Parameter '{param}' is not applicable to Tsuno (uses Rust/Hyper transport). "
                 f"Parameter will be ignored.",
                 UserWarning,
                 stacklevel=2,
@@ -282,7 +282,7 @@ def run(
         warnings.warn(
             f"The following parameters are not yet implemented and will be ignored: "
             f"{', '.join(not_implemented)}. "
-            f"See https://github.com/yourusername/z/issues for implementation status.",
+            f"See https://github.com/i2y/tsuno/issues for implementation status.",
             UserWarning,
             stacklevel=2,
         )
@@ -359,7 +359,7 @@ def run(
                 host, port_str = bind.rsplit(":", 1)
                 port = int(port_str)
             else:
-                # Unix socket in bind format (e.g., "unix:/tmp/z.sock")
+                # Unix socket in bind format (e.g., "unix:/tmp/tsuno.sock")
                 if bind.startswith("unix:"):
                     uds_path = bind[5:]  # Remove "unix:" prefix
                     serve_uds(

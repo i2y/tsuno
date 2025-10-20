@@ -1,5 +1,5 @@
 """
-Error logging functionality for z.
+Error logging functionality for tsuno.
 
 Provides Gunicorn/Uvicorn-compatible error logging to file or stderr.
 """
@@ -30,7 +30,7 @@ def setup_error_logging(
     global _error_logger
 
     if _error_logger is None:
-        _error_logger = logging.getLogger("z.error")
+        _error_logger = logging.getLogger("tsuno.error")
 
         # Clear existing handlers
         _error_logger.handlers.clear()

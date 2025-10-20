@@ -1,5 +1,5 @@
 """
-ASGI adapter for serving ASGI applications with the z server.
+ASGI adapter for serving ASGI applications with the Tsuno server.
 
 This module provides compatibility with ASGI applications
 (FastAPI, Starlette, Quart, connect-python, etc.).

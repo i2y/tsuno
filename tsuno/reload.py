@@ -17,7 +17,7 @@ try:
 except ImportError:
     watch = None
 
-logger = logging.getLogger("z.reload")
+logger = logging.getLogger("tsuno.reload")
 
 
 class Reloader:

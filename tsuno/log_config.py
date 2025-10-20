@@ -1,5 +1,5 @@
 """
-Logging configuration for z.
+Logging configuration for tsuno.
 
 Provides Uvicorn-compatible logging configuration with support for
 custom log configs via dictConfig.
@@ -20,7 +20,7 @@ DEFAULT_LOG_CONFIG: dict[str, Any] = {
             "use_colors": None,
         },
         "access": {
-            "()": "z.access_log.AccessLogFormatter",
+            "()": "tsuno.access_log.AccessLogFormatter",
             "fmt": '%(levelprefix)s %(client_addr)s - "%(request_line)s" %(status_code)s',
         },
     },
@@ -37,8 +37,8 @@ DEFAULT_LOG_CONFIG: dict[str, Any] = {
         },
     },
     "loggers": {
-        "z": {"handlers": ["default"], "level": "INFO"},
-        "z.access": {"handlers": ["access"], "level": "INFO", "propagate": False},
+        "tsuno": {"handlers": ["default"], "level": "INFO"},
+        "tsuno.access": {"handlers": ["access"], "level": "INFO", "propagate": False},
     },
 }
 
@@ -69,11 +69,11 @@ def setup_logging(
     # Set log level
     if log_level:
         level = log_level.upper()
-        config["loggers"]["z"]["level"] = level
+        config["loggers"]["tsuno"]["level"] = level
 
     # Configure access logging
     if not access_log:
-        config["loggers"]["z.access"]["handlers"] = []
+        config["loggers"]["tsuno.access"]["handlers"] = []
 
     # Configure colors in formatters
     if use_colors is not None:

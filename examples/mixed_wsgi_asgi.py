@@ -2,7 +2,7 @@
 """
 Mixed WSGI/ASGI Application Example
 
-This demonstrates z server's ability to serve both WSGI (Flask) and ASGI (FastAPI)
+This demonstrates Tsuno server's ability to serve both WSGI (Flask) and ASGI (FastAPI)
 applications simultaneously on the same server, with automatic protocol detection.
 
 Use case: Add modern async REST API (FastAPI) to existing Flask application without
@@ -11,7 +11,7 @@ replacing the entire stack.
 Architecture:
 - Flask (WSGI) serves traditional web pages at / and /admin
 - FastAPI (ASGI) serves REST API at /api
-- Single z server handles both protocols transparently
+- Single Tsuno server handles both protocols transparently
 """
 
 from fastapi import FastAPI
@@ -44,7 +44,7 @@ def flask_index():
     </head>
     <body>
         <h1>Mixed WSGI/ASGI Application Demo</h1>
-        <p>This single z server hosts both Flask (WSGI) and FastAPI (ASGI) applications!</p>
+        <p>This single Tsuno server hosts both Flask (WSGI) and FastAPI (ASGI) applications!</p>
 
         <div class="section wsgi">
             <h2>🐍 Flask Endpoints (WSGI)</h2>
@@ -142,7 +142,7 @@ def admin_settings():
     return jsonify(
         {
             "admin_section": "settings",
-            "server": "z",
+            "server": "tsuno",
             "protocol": "WSGI",
             "max_workers": 7,
         }
@@ -155,7 +155,7 @@ def admin_settings():
 
 fastapi_app = FastAPI(
     title="Mixed App API",
-    description="FastAPI running alongside Flask on the same z server",
+    description="FastAPI running alongside Flask on the same Tsuno server",
     version="1.0.0",
 )
 
