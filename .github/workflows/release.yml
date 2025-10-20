@@ -38,13 +38,13 @@ jobs:
           - os: ubuntu-latest
             platform: linux-x86_64
             target: x86_64
-            manylinux: auto
+            manylinux: "2_28"
 
           # Linux aarch64
           - os: ubuntu-latest
             platform: linux-aarch64
             target: aarch64
-            manylinux: auto
+            manylinux: "2_28"
 
           # macOS Apple Silicon
           - os: macos-14
