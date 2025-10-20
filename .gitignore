@@ -54,3 +54,6 @@ test.bin
 # Generated proto files (from testing)
 greeterservice*
 streamingservice*
+
+# Benchmark comparison results (not tracked)
+benchmarks/comparison.md

@@ -159,7 +159,7 @@ kill -HUP $(cat /var/run/tsuno.pid)
 ## Performance
 
 Performance varies by workload, platform, and configuration.
-Please see [benchmarks/comparison.md](benchmarks/comparison.md) for detailed results and methodology.
+Run `wrk` or `h2load` benchmarks to measure performance on your specific hardware.
 
 ## Migration
 
@@ -206,7 +206,6 @@ MIT License - see [LICENSE](LICENSE)
 
 - **Repository**: [github.com/i2y/tsuno](https://github.com/i2y/tsuno)
 - **Issues**: [github.com/i2y/tsuno/issues](https://github.com/i2y/tsuno/issues)
-- **Benchmarks**: [benchmarks/comparison.md](benchmarks/comparison.md)
 
 ## Acknowledgments
 
