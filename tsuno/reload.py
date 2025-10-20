@@ -50,9 +50,7 @@ class Reloader:
             reload_delay: Time to wait before reloading after detecting changes (seconds)
         """
         if watch is None:
-            raise RuntimeError(
-                "watchfiles is not installed. Install it with: pip install watchfiles"
-            )
+            raise RuntimeError("watchfiles is not installed. Install it with: pip install watchfiles")
 
         self.target = target
         self.args = args

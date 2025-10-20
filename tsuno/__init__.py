@@ -224,8 +224,7 @@ def run(
     else:
         # Unknown loop value, warn and use default
         warnings.warn(
-            f"Unknown loop value '{loop}'. Valid values are 'auto', 'asyncio', 'uvloop'. "
-            f"Using default (auto-detect).",
+            f"Unknown loop value '{loop}'. Valid values are 'auto', 'asyncio', 'uvloop'. Using default (auto-detect).",
             UserWarning,
             stacklevel=2,
         )
@@ -296,9 +295,7 @@ def run(
     # Setup access logging
     from .access_log import setup_access_logging  # type: ignore
 
-    setup_access_logging(
-        enabled=access_log, use_colors=use_colors if use_colors is not None else True
-    )
+    setup_access_logging(enabled=access_log, use_colors=use_colors if use_colors is not None else True)
 
     # Setup logging configuration
     if log_config is not None:

@@ -174,8 +174,7 @@ def _drop_privileges(
         raise RuntimeError("Failed to drop root privileges")
 
     print(
-        f"[Worker {os.getpid()}] Privileges dropped successfully "
-        f"(UID={os.getuid()}, GID={os.getgid()})",
+        f"[Worker {os.getpid()}] Privileges dropped successfully (UID={os.getuid()}, GID={os.getgid()})",
         file=sys.stderr,
         flush=True,
     )
@@ -230,8 +229,7 @@ def _worker_process(
         jitter = random.randint(0, max_requests_jitter or 0)
         request_limit = max_requests + jitter
         print(
-            f"[Worker {worker_id}] Request limit: {request_limit} "
-            f"(base={max_requests}, jitter={jitter})",
+            f"[Worker {worker_id}] Request limit: {request_limit} (base={max_requests}, jitter={jitter})",
             file=sys.stderr,
             flush=True,
         )
@@ -496,8 +494,7 @@ def serve(
         cpu_count = multiprocessing.cpu_count()
         workers = max(1, cpu_count // blocking_threads)
         print(
-            f"Auto-detected {workers} workers for {cpu_count} CPUs "
-            f"with {blocking_threads} threads per worker",
+            f"Auto-detected {workers} workers for {cpu_count} CPUs with {blocking_threads} threads per worker",
             file=sys.stderr,
             flush=True,
         )
@@ -641,8 +638,7 @@ def serve(
                         # (prevents idle workers from timing out)
                         # Skip if request count is 0 OR if it's far future (never updated)
                         if (
-                            worker_request_counts[i] is not None
-                            and worker_request_counts[i].value == 0  # type: ignore
+                            worker_request_counts[i] is not None and worker_request_counts[i].value == 0  # type: ignore
                         ):
                             continue  # Skip workers that haven't handled any requests yet
 
@@ -721,8 +717,7 @@ def serve(
                     p.join(timeout=graceful_timeout)
                     if p.is_alive():
                         print(
-                            f"[Main] Old worker {i} (PID {p.pid}) "
-                            f"did not exit gracefully, killing...",
+                            f"[Main] Old worker {i} (PID {p.pid}) did not exit gracefully, killing...",
                             file=sys.stderr,
                             flush=True,
                         )
@@ -783,9 +778,7 @@ def serve(
 
                     # Create new shared memory for restarted worker
                     # Initialize to far future so idle workers don't timeout immediately
-                    new_last_activity = (
-                        Value(c_double, time.time() + 86400) if timeout > 0 else None
-                    )
+                    new_last_activity = Value(c_double, time.time() + 86400) if timeout > 0 else None
                     new_request_count = Value(c_int, 0) if max_requests is not None else None
                     worker_last_activity[i] = new_last_activity
                     worker_request_counts[i] = new_request_count

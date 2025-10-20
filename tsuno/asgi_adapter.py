@@ -67,9 +67,7 @@ class ASGIAdapter:
             request_receiver: Optional RequestReceiver for streaming request body (full-duplex)
         """
         # Submit request to event loop worker (non-blocking)
-        self.worker.handle_request_non_blocking(
-            sender, method, path, headers, body, request_receiver
-        )
+        self.worker.handle_request_non_blocking(sender, method, path, headers, body, request_receiver)
 
         # Return immediately - request will be processed asynchronously
 

@@ -218,9 +218,7 @@ class Dispatcher:
 
             # Try default app
             if self.default_app and self.default_adapter:
-                self.default_adapter.handle_request(
-                    sender, method, path, headers, body, request_receiver
-                )
+                self.default_adapter.handle_request(sender, method, path, headers, body, request_receiver)
             else:
                 # No app found - send 404
                 sender.send_response(404, [("Content-Type", "text/plain")], b"404 Not Found", None)

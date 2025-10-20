@@ -193,9 +193,7 @@ class ASGIEventLoopWorker:
         # Convert headers to ASGI format (lowercase name, bytes value)
         asgi_headers = []
         for header_name, header_value in headers:
-            asgi_headers.append(
-                (header_name.lower().encode("latin-1"), header_value.encode("latin-1"))
-            )
+            asgi_headers.append((header_name.lower().encode("latin-1"), header_value.encode("latin-1")))
 
         # Build the ASGI scope
         scope = {
@@ -287,12 +285,7 @@ class ASGIEventLoopWorker:
 
         # Create send callable
         async def send(message: dict[str, Any]):
-            nonlocal \
-                response_started, \
-                response_sent, \
-                response_status, \
-                response_headers, \
-                response_body
+            nonlocal response_started, response_sent, response_status, response_headers, response_body
 
             match message["type"]:
                 case "http.response.start":

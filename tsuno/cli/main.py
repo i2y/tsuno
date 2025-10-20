@@ -181,10 +181,7 @@ For more information, visit: https://github.com/i2y/tsuno
         "--mount",
         action="append",
         dest="mounts",
-        help=(
-            "Mount additional application at path (format: 'path:module:attr'). "
-            "Can be used multiple times."
-        ),
+        help=("Mount additional application at path (format: 'path:module:attr'). Can be used multiple times."),
     )
 
     # Logging
@@ -223,9 +220,7 @@ For more information, visit: https://github.com/i2y/tsuno
         action="store_false",
         help="Disable colored log output",
     )
-    logging_group.add_argument(
-        "--error-log", help="Error log file (use '-' for stderr, not implemented yet)"
-    )
+    logging_group.add_argument("--error-log", help="Error log file (use '-' for stderr, not implemented yet)")
 
     # Development options
     dev_group = parser.add_argument_group("Development")
@@ -347,9 +342,7 @@ def resolve_config(args: argparse.Namespace) -> dict[str, Any]:
 
     # Get the parser defaults to compare against
     parser_temp = create_parser()
-    defaults = vars(
-        parser_temp.parse_args([args.app])
-    )  # Parse with just the app argument to get defaults
+    defaults = vars(parser_temp.parse_args([args.app]))  # Parse with just the app argument to get defaults
 
     for key, value in vars(args).items():
         if value is not None and key not in [
@@ -442,9 +435,7 @@ def main() -> None:
     # Set up access logging
     from ..access_log import setup_access_logging
 
-    setup_access_logging(
-        enabled=access_log, use_colors=use_colors if use_colors is not None else True
-    )
+    setup_access_logging(enabled=access_log, use_colors=use_colors if use_colors is not None else True)
 
     # Remove utility flags from config
     config.pop("daemon", None)

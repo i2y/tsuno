@@ -342,26 +342,20 @@ def validate_config(config: dict[str, Any]) -> None:
     if "graceful_timeout" in config:
         graceful_timeout = config["graceful_timeout"]
         if not isinstance(graceful_timeout, int) or graceful_timeout < 0:
-            raise ConfigError(
-                f"graceful_timeout must be a non-negative integer, got: {graceful_timeout}"
-            )
+            raise ConfigError(f"graceful_timeout must be a non-negative integer, got: {graceful_timeout}")
 
     # Validate max_restarts_per_worker
     if "max_restarts_per_worker" in config:
         max_restarts = config["max_restarts_per_worker"]
         if not isinstance(max_restarts, int) or max_restarts < 0:
-            raise ConfigError(
-                f"max_restarts_per_worker must be a non-negative integer, got: {max_restarts}"
-            )
+            raise ConfigError(f"max_restarts_per_worker must be a non-negative integer, got: {max_restarts}")
 
     # Validate log_level
     if "log_level" in config:
         log_level = config["log_level"].upper()
         valid_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
         if log_level not in valid_levels:
-            raise ConfigError(
-                f"log_level must be one of {valid_levels}, got: {config['log_level']}"
-            )
+            raise ConfigError(f"log_level must be one of {valid_levels}, got: {config['log_level']}")
 
     # Validate log_format
     if "log_format" in config:
@@ -405,6 +399,4 @@ def validate_config(config: dict[str, Any]) -> None:
         if hook_name in config:
             hook = config[hook_name]
             if not callable(hook):
-                raise ConfigError(
-                    f"{hook_name} must be a callable function, got: {type(hook).__name__}"
-                )
+                raise ConfigError(f"{hook_name} must be a callable function, got: {type(hook).__name__}")

@@ -121,9 +121,7 @@ def load_log_config_file(config_file: str) -> dict[str, Any]:
             if hasattr(module, "LOG_CONFIG"):
                 return module.LOG_CONFIG
             else:
-                raise ValueError(
-                    f"Python config file must define LOG_CONFIG variable: {config_file}"
-                )
+                raise ValueError(f"Python config file must define LOG_CONFIG variable: {config_file}")
         else:
             raise ValueError(f"Failed to load Python config file: {config_file}")
 
@@ -146,8 +144,7 @@ def load_log_config_file(config_file: str) -> dict[str, Any]:
 
     else:
         raise ValueError(
-            f"Unsupported log config file format: {config_file}. "
-            "Supported formats: .py, .json, .yaml, .yml"
+            f"Unsupported log config file format: {config_file}. Supported formats: .py, .json, .yaml, .yml"
         )
 
 

@@ -85,9 +85,7 @@ def import_app(module_str: str, factory: bool = False, app_dir: str | None = Non
     # Call factory if needed
     if factory:
         if not callable(app):
-            raise ApplicationLoadError(
-                f"Application factory '{attr_name or 'app'}' is not callable"
-            )
+            raise ApplicationLoadError(f"Application factory '{attr_name or 'app'}' is not callable")
         try:
             app = app()
         except Exception as e:
@@ -115,17 +113,14 @@ def parse_mount_spec(mount_spec: str) -> tuple[str, str]:
     """
     if ":" not in mount_spec:
         raise ValueError(
-            f"Invalid mount specification: '{mount_spec}'. "
-            "Expected format: 'path:module' or 'path:module:attribute'"
+            f"Invalid mount specification: '{mount_spec}'. Expected format: 'path:module' or 'path:module:attribute'"
         )
 
     # Split on first colon
     path, _, rest = mount_spec.partition(":")
 
     if not path.startswith("/"):
-        raise ValueError(
-            f"Mount path must start with '/': '{path}'. Example: '/api:api.app:application'"
-        )
+        raise ValueError(f"Mount path must start with '/': '{path}'. Example: '/api:api.app:application'")
 
     return path, rest
 
