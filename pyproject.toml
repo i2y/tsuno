@@ -101,7 +101,7 @@ manifest-path = "pyhtransport/Cargo.toml"
 include = ["tsuno/**/*.py", "tsuno/**/*.pyi"]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py311"
 extend-exclude = [".venv", "build", "target"]
 
