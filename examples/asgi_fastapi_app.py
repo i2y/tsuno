@@ -127,7 +127,7 @@ async def trigger_error(code: int):
 
 def main():
     """Run the FastAPI app using the high-performance ASGI server."""
-    from z import serve
+    from tsuno import serve
 
     print("Starting FastAPI app with high-performance ASGI server...")
     print("Visit http://localhost:8000 to see the app")

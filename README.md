@@ -1,4 +1,4 @@
-# z
+# Tsuno
 
 **High-performance WSGI/ASGI server powered by Rust**
 
@@ -6,12 +6,12 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Development Status](https://img.shields.io/badge/status-alpha-orange.svg)
 
-z aims to be a drop-in replacement for Gunicorn and Uvicorn with a Rust-powered transport layer. Run your Django, Flask, FastAPI, and Starlette applications with HTTP/2 support.
+Tsuno aims to be a drop-in replacement for Gunicorn and Uvicorn with a Rust-powered transport layer. Run your Django, Flask, FastAPI, and Starlette applications with HTTP/2 support.
 
 ## Installation
 
 ```bash
-pip install z
+pip install tsuno
 ```
 
 ## Quick Start
@@ -20,7 +20,7 @@ pip install z
 
 ```bash
 # Replace Gunicorn/Uvicorn
-z myapp:app --workers 4 --bind 0.0.0.0:8000
+tsuno myapp:app --workers 4 --bind 0.0.0.0:8000
 ```
 
 ### Python API
@@ -28,7 +28,7 @@ z myapp:app --workers 4 --bind 0.0.0.0:8000
 **Flask (WSGI)**:
 ```python
 from flask import Flask
-from z import run
+from tsuno import run
 
 app = Flask(__name__)
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 **FastAPI (ASGI)**:
 ```python
 from fastapi import FastAPI
-from z import run
+from tsuno import run
 
 app = FastAPI()
 
@@ -117,12 +117,12 @@ threads = 2
 log_level = "info"
 ```
 
-See [examples/z.toml](examples/z.toml) for all options.
+See [examples/tsuno.toml](examples/tsuno.toml) for all options.
 
 ### Python API
 
 ```python
-from z import run
+from tsuno import run
 
 run(
     app,
@@ -181,17 +181,17 @@ import uvicorn
 uvicorn.run(app, host="0.0.0.0", port=8000, workers=4)
 
 # After (compatible API!)
-import z
-z.run(app, host="0.0.0.0", port=8000, workers=4)
+import tsuno
+tsuno.run(app, host="0.0.0.0", port=8000, workers=4)
 ```
 
 ## Development Status
 
-**z is in early development (alpha stage)**.
+**Tsuno is in early development (alpha stage)**.
 
 - ⚠️ Real-world production testing needed
 
-**Help us test!** Report issues at [github.com/i2y/z/issues](https://github.com/i2y/z/issues)
+**Help us test!** Report issues at [github.com/i2y/tsuno/issues](https://github.com/i2y/tsuno/issues)
 
 ## Requirements
 
@@ -204,13 +204,13 @@ MIT License - see [LICENSE](LICENSE)
 
 ## Links
 
-- **Repository**: [github.com/i2y/z](https://github.com/i2y/z)
-- **Issues**: [github.com/i2y/z/issues](https://github.com/i2y/z/issues)
+- **Repository**: [github.com/i2y/tsuno](https://github.com/i2y/tsuno)
+- **Issues**: [github.com/i2y/tsuno/issues](https://github.com/i2y/tsuno/issues)
 - **Benchmarks**: [benchmarks/comparison.md](benchmarks/comparison.md)
 
 ## Acknowledgments
 
-z is inspired by and builds upon excellent work from:
+Tsuno is inspired by and builds upon excellent work from:
 - **Gunicorn** & **Uvicorn**: Server standards
 - **Granian**: Rust-Python hybrid architecture
 - **Tokio**, **hyper**, **PyO3**: Rust ecosystem

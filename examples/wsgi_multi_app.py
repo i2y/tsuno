@@ -185,7 +185,7 @@ def main():
     print("  http://localhost:8000/admin   - Admin Application")
     print("  http://localhost:8000/blog    - Blog Application")
 
-    from z import serve
+    from tsuno import serve
 
     # Mount all applications using dictionary syntax
     serve(

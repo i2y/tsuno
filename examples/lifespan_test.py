@@ -8,7 +8,7 @@ Demonstrates proper startup/shutdown lifecycle management.
 import asyncio
 import sys
 
-from z import serve
+from tsuno import serve
 
 
 # Simulated database connection

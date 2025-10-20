@@ -27,7 +27,7 @@ async def app(scope, receive, send):
 if __name__ == "__main__":
     import sys
 
-    from z import serve
+    from tsuno import serve
 
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
     workers = int(sys.argv[2]) if len(sys.argv) > 2 else 7

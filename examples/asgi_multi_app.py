@@ -261,7 +261,7 @@ def main():
     print("  http://localhost:8001/admin/docs   - Admin Panel Docs")
     print("  http://localhost:8001/metrics/docs - Metrics Service Docs")
 
-    from z import serve
+    from tsuno import serve
 
     # Mount all applications using dictionary syntax
     serve(
@@ -273,7 +273,7 @@ def main():
 
 def main_with_submount():
     """Alternative: Use FastAPI's built-in mount (for comparison)."""
-    from z import serve
+    from tsuno import serve
 
     # Create a main app and mount sub-apps using FastAPI's mount
     root_app = FastAPI(title="Root Application with Sub-Apps")

@@ -1,5 +1,5 @@
 [project]
-name = "z"
+name = "tsuno"
 version = "0.1.0"
 description = "High-performance WSGI/ASGI server for Python, powered by Rust"
 readme = "README.md"
@@ -7,7 +7,7 @@ license = "MIT"
 authors = [
     { name = "i2y", email = "" }
 ]
-keywords = ["wsgi", "asgi", "server", "rust", "async", "http2", "fastapi", "flask", "django", "starlette", "z"]
+keywords = ["wsgi", "asgi", "server", "rust", "async", "http2", "fastapi", "flask", "django", "starlette", "tsuno"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -29,12 +29,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/i2y/z"
-Repository = "https://github.com/i2y/z"
-Issues = "https://github.com/i2y/z/issues"
+Homepage = "https://github.com/i2y/tsuno"
+Repository = "https://github.com/i2y/tsuno"
+Issues = "https://github.com/i2y/tsuno/issues"
 
 [project.scripts]
-z = "z.cli.main:main"
+tsuno = "tsuno.cli.main:main"
 
 [project.optional-dependencies]
 # For high-performance servers
@@ -97,8 +97,8 @@ build-backend = "maturin"
 [tool.maturin]
 python-source = "."
 manifest-path = "pyhtransport/Cargo.toml"
-# Include the z Python package
-include = ["z/**/*.py", "z/**/*.pyi"]
+# Include the tsuno Python package
+include = ["tsuno/**/*.py", "tsuno/**/*.pyi"]
 
 [tool.ruff]
 line-length = 100
@@ -116,4 +116,4 @@ select = ["E", "F", "I"]  # E: pycodestyle errors, F: pyflakes, I: isort
 ignore = []
 
 [tool.ruff.lint.isort]
-known-first-party = ["z", "pyhtransport"]
+known-first-party = ["tsuno", "pyhtransport"]

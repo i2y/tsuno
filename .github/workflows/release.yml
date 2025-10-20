@@ -112,17 +112,17 @@ jobs:
 
       - name: Install wheel
         run: |
-          pip install --find-links dist z
+          pip install --find-links dist tsuno
 
       - name: Test imports
         run: |
-          python -c "import z; import pyhtransport; print('Successfully imported z and pyhtransport')"
+          python -c "import tsuno; import pyhtransport; print('Successfully imported tsuno and pyhtransport')"
 
       - name: Run basic test
         run: |
           # Test installed package
-          python -c "import z; import pyhtransport; print('✓ Package installed successfully')"
-          python -c "from z import run, serve; print('✓ Core functions available')"
+          python -c "import tsuno; import pyhtransport; print('✓ Package installed successfully')"
+          python -c "from tsuno import run, serve; print('✓ Core functions available')"
 
   publish-testpypi:
     name: Publish to TestPyPI
@@ -131,7 +131,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://test.pypi.org/project/z/
+      url: https://test.pypi.org/project/tsuno/
 
     steps:
       - name: Download all artifacts
@@ -153,7 +153,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/project/z/
+      url: https://pypi.org/project/tsuno/
 
     steps:
       - name: Download all artifacts

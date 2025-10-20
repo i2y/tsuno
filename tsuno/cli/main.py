@@ -6,7 +6,7 @@ import argparse
 import sys
 from typing import Any
 
-from z import __version__
+from tsuno import __version__
 
 from .config import (
     ConfigError,

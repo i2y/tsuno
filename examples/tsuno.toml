@@ -1,5 +1,5 @@
-# z TOML Configuration Example
-# This file demonstrates all available configuration options for z server.
+# Tsuno TOML Configuration Example
+# This file demonstrates all available configuration options for Tsuno server.
 
 # Server Binding
 # Bind address in format "host:port" or "unix:/path/to/socket"
@@ -39,7 +39,7 @@ backlog = 2048
 
 # Process Management
 # PID file location (optional)
-pid_file = "/var/run/z.pid"
+pid_file = "/var/run/tsuno.pid"
 
 # Run server in background (daemon mode)
 daemon = false
@@ -62,10 +62,10 @@ log_level = "INFO"
 log_format = "text"
 
 # Access log file (use "-" for stdout, or specify file path)
-# access_log = "/var/log/z/access.log"
+# access_log = "/var/log/tsuno/access.log"
 
 # Error log file (use "-" for stderr, or specify file path)
-# error_log = "/var/log/z/error.log"
+# error_log = "/var/log/tsuno/error.log"
 
 # Development Options
 # Enable auto-reload on code changes (development only)

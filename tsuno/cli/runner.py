@@ -8,7 +8,7 @@ the z server.
 import sys
 from typing import Any
 
-from z import serve, serve_fd, serve_uds
+from tsuno import serve, serve_fd, serve_uds
 
 from .utils import ApplicationLoadError, import_app, parse_mount_spec
 

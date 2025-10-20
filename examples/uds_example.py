@@ -23,7 +23,7 @@ Usage:
     curl --unix-socket /tmp/z.sock http://localhost/
 """
 
-from z import run
+from tsuno import run
 
 
 def application(environ, start_response):

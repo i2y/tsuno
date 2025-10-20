@@ -45,7 +45,7 @@ jobs:
 
       - name: Run type checking
         run: |
-          uv run basedpyright z || echo "Type checking completed with warnings"
+          uv run basedpyright tsuno || echo "Type checking completed with warnings"
 
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -93,8 +93,8 @@ jobs:
       - name: Run tests
         run: |
           # Basic import and functionality test
-          python -c "import z; import pyhtransport; print('✓ Imports successful')"
-          python -c "from z import run, serve; print('✓ Core functions available')"
+          python -c "import tsuno; import pyhtransport; print('✓ Imports successful')"
+          python -c "from tsuno import run, serve; print('✓ Core functions available')"
 
   build-wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -145,4 +145,4 @@ jobs:
 
       - name: Test import
         run: |
-          python -c "import z; import pyhtransport; print('Import successful')"
+          python -c "import tsuno; import pyhtransport; print('Import successful')"

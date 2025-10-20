@@ -13,7 +13,7 @@ echo ""
 
 # Test 1: Import test
 echo "Test 1: Import test"
-python -c "import z; print('✅ z imported successfully')" || exit 1
+python -c "import tsuno; print('✅ z imported successfully')" || exit 1
 python -c "import pyhtransport; print('✅ pyhtransport imported successfully')" || exit 1
 echo ""
 

@@ -79,7 +79,7 @@ def show_headers():
 
 def main():
     """Run the Flask app using the high-performance WSGI server."""
-    from z import serve
+    from tsuno import serve
 
     print("Starting Flask app with high-performance WSGI server...")
     print("Visit http://localhost:5001 to see the app")

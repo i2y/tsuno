@@ -1,4 +1,4 @@
-# z Development Tasks
+# Tsuno Development Tasks
 
 # Default recipe to display help
 default:
@@ -6,7 +6,7 @@ default:
 
 # Display help
 help:
-    @echo "z Development Commands"
+    @echo "Tsuno Development Commands"
     @echo "======================================"
     @just --list
 
@@ -36,8 +36,8 @@ install:
 # Run basic import and functionality tests (matching CI behavior)
 test:
     @echo "Running basic import and functionality tests..."
-    @uv run python -c "import z; import pyhtransport; print('✓ Imports successful')"
-    @uv run python -c "from z import run, serve; print('✓ Core functions available')"
+    @uv run python -c "import tsuno; import pyhtransport; print('✓ Imports successful')"
+    @uv run python -c "from tsuno import run, serve; print('✓ Core functions available')"
     @echo "All tests passed!"
 
 # ============== Code Quality ==============
@@ -77,22 +77,22 @@ clean:
 # Run Linux compatibility tests in Docker
 test-linux:
     @echo "Running Linux tests in Docker..."
-    @docker build -f Dockerfile.linux-test -t z-linux-test .
-    @docker run --rm z-linux-test bash tests/linux_basic_test.sh
+    @docker build -f Dockerfile.linux-test -t tsuno-linux-test .
+    @docker run --rm tsuno-linux-test bash tests/linux_basic_test.sh
 
 # Run Linux benchmarks in Docker
 bench-linux:
     @echo "Running Linux benchmarks in Docker..."
-    @docker build -f Dockerfile.linux-test -t z-linux-test .
-    @docker run --rm z-linux-test bash tests/linux_benchmark_simple.sh
+    @docker build -f Dockerfile.linux-test -t tsuno-linux-test .
+    @docker run --rm tsuno-linux-test bash tests/linux_benchmark_simple.sh
 
 # Run full Linux test suite (tests + benchmarks)
 test-linux-full:
     @echo "Running full Linux test suite in Docker..."
     @docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
 
-# Run Linux server comparison benchmark (z vs Granian vs Uvicorn vs Hypercorn)
+# Run Linux server comparison benchmark (Tsuno vs Granian vs Uvicorn vs Hypercorn)
 bench-linux-comparison:
     @echo "Running comprehensive server comparison on Linux..."
-    @docker build -f Dockerfile.linux-test -t z-linux-test .
-    @docker run --rm z-linux-test bash tests/linux_benchmark_comparison.sh
+    @docker build -f Dockerfile.linux-test -t tsuno-linux-test .
+    @docker run --rm tsuno-linux-test bash tests/linux_benchmark_comparison.sh

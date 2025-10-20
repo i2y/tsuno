@@ -1880,6 +1880,103 @@ wheels = [
 ]
 
 [[package]]
+name = "tsuno"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "click" },
+    { name = "python-dotenv" },
+    { name = "watchfiles" },
+]
+
+[package.optional-dependencies]
+uvloop = [
+    { name = "uvloop", marker = "python_full_version < '3.14' and sys_platform != 'win32'" },
+]
+
+[package.dev-dependencies]
+benchmark = [
+    { name = "fastapi" },
+    { name = "flask" },
+    { name = "granian" },
+    { name = "gunicorn" },
+    { name = "httpx" },
+    { name = "hypercorn" },
+    { name = "matplotlib" },
+    { name = "pandas" },
+    { name = "psutil" },
+    { name = "pydantic" },
+    { name = "rich" },
+    { name = "seaborn" },
+    { name = "uvicorn", extra = ["standard"] },
+]
+dev = [
+    { name = "basedpyright" },
+    { name = "black" },
+    { name = "fastapi" },
+    { name = "flask" },
+    { name = "isort" },
+    { name = "maturin" },
+    { name = "pydantic" },
+    { name = "pytest" },
+    { name = "pytest-asyncio" },
+    { name = "pytest-cov" },
+    { name = "ruff" },
+]
+docs = [
+    { name = "mkdocs" },
+    { name = "mkdocs-material" },
+    { name = "mkdocstrings", extra = ["python"] },
+    { name = "pymdown-extensions" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "click", specifier = ">=8.0.0" },
+    { name = "python-dotenv", specifier = ">=1.0.0" },
+    { name = "uvloop", marker = "python_full_version < '3.14' and sys_platform != 'win32' and extra == 'uvloop'", specifier = ">=0.21.0" },
+    { name = "watchfiles", specifier = ">=0.24.0" },
+]
+provides-extras = ["server", "uvloop"]
+
+[package.metadata.requires-dev]
+benchmark = [
+    { name = "fastapi", specifier = ">=0.115.0" },
+    { name = "flask", specifier = ">=3.1.0" },
+    { name = "granian", specifier = ">=2.5.0" },
+    { name = "gunicorn", specifier = ">=23.0.0" },
+    { name = "httpx", specifier = ">=0.27.0" },
+    { name = "hypercorn", specifier = ">=0.17.3" },
+    { name = "matplotlib", specifier = ">=3.9.0" },
+    { name = "pandas", specifier = ">=2.2.0" },
+    { name = "psutil", specifier = ">=6.1.0" },
+    { name = "pydantic", specifier = ">=2.10.0" },
+    { name = "rich", specifier = ">=13.5.0" },
+    { name = "seaborn", specifier = ">=0.13.0" },
+    { name = "uvicorn", extras = ["standard"], specifier = ">=0.32.0" },
+]
+dev = [
+    { name = "basedpyright", specifier = ">=1.23.0" },
+    { name = "black", specifier = ">=24.10.0" },
+    { name = "fastapi", specifier = ">=0.115.0" },
+    { name = "flask", specifier = ">=3.1.0" },
+    { name = "isort", specifier = ">=5.13.0" },
+    { name = "maturin", specifier = ">=1.9.4" },
+    { name = "pydantic", specifier = ">=2.10.0" },
+    { name = "pytest", specifier = ">=8.3.0" },
+    { name = "pytest-asyncio", specifier = ">=0.24.0" },
+    { name = "pytest-cov", specifier = ">=6.0.0" },
+    { name = "ruff", specifier = ">=0.8.0" },
+]
+docs = [
+    { name = "mkdocs", specifier = ">=1.5.0" },
+    { name = "mkdocs-material", specifier = ">=9.5.0" },
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.24.0" },
+    { name = "pymdown-extensions", specifier = ">=10.7.0" },
+]
+server = []
+
+[[package]]
 name = "typing-extensions"
 version = "4.15.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2144,100 +2241,3 @@ sdist = { url = "https://files.pythonhosted.org/packages/c9/4a/44d3c295350d77642
 wheels = [
     { url = "https://files.pythonhosted.org/packages/78/58/e860788190eba3bcce367f74d29c4675466ce8dddfba85f7827588416f01/wsproto-1.2.0-py3-none-any.whl", hash = "sha256:b9acddd652b585d75b20477888c56642fdade28bdfd3579aa24a4d2c037dd736", size = 24226, upload-time = "2022-08-23T19:58:19.96Z" },
 ]
-
-[[package]]
-name = "z"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "click" },
-    { name = "python-dotenv" },
-    { name = "watchfiles" },
-]
-
-[package.optional-dependencies]
-uvloop = [
-    { name = "uvloop", marker = "python_full_version < '3.14' and sys_platform != 'win32'" },
-]
-
-[package.dev-dependencies]
-benchmark = [
-    { name = "fastapi" },
-    { name = "flask" },
-    { name = "granian" },
-    { name = "gunicorn" },
-    { name = "httpx" },
-    { name = "hypercorn" },
-    { name = "matplotlib" },
-    { name = "pandas" },
-    { name = "psutil" },
-    { name = "pydantic" },
-    { name = "rich" },
-    { name = "seaborn" },
-    { name = "uvicorn", extra = ["standard"] },
-]
-dev = [
-    { name = "basedpyright" },
-    { name = "black" },
-    { name = "fastapi" },
-    { name = "flask" },
-    { name = "isort" },
-    { name = "maturin" },
-    { name = "pydantic" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-cov" },
-    { name = "ruff" },
-]
-docs = [
-    { name = "mkdocs" },
-    { name = "mkdocs-material" },
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "pymdown-extensions" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "click", specifier = ">=8.0.0" },
-    { name = "python-dotenv", specifier = ">=1.0.0" },
-    { name = "uvloop", marker = "python_full_version < '3.14' and sys_platform != 'win32' and extra == 'uvloop'", specifier = ">=0.21.0" },
-    { name = "watchfiles", specifier = ">=0.24.0" },
-]
-provides-extras = ["server", "uvloop"]
-
-[package.metadata.requires-dev]
-benchmark = [
-    { name = "fastapi", specifier = ">=0.115.0" },
-    { name = "flask", specifier = ">=3.1.0" },
-    { name = "granian", specifier = ">=2.5.0" },
-    { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "httpx", specifier = ">=0.27.0" },
-    { name = "hypercorn", specifier = ">=0.17.3" },
-    { name = "matplotlib", specifier = ">=3.9.0" },
-    { name = "pandas", specifier = ">=2.2.0" },
-    { name = "psutil", specifier = ">=6.1.0" },
-    { name = "pydantic", specifier = ">=2.10.0" },
-    { name = "rich", specifier = ">=13.5.0" },
-    { name = "seaborn", specifier = ">=0.13.0" },
-    { name = "uvicorn", extras = ["standard"], specifier = ">=0.32.0" },
-]
-dev = [
-    { name = "basedpyright", specifier = ">=1.23.0" },
-    { name = "black", specifier = ">=24.10.0" },
-    { name = "fastapi", specifier = ">=0.115.0" },
-    { name = "flask", specifier = ">=3.1.0" },
-    { name = "isort", specifier = ">=5.13.0" },
-    { name = "maturin", specifier = ">=1.9.4" },
-    { name = "pydantic", specifier = ">=2.10.0" },
-    { name = "pytest", specifier = ">=8.3.0" },
-    { name = "pytest-asyncio", specifier = ">=0.24.0" },
-    { name = "pytest-cov", specifier = ">=6.0.0" },
-    { name = "ruff", specifier = ">=0.8.0" },
-]
-docs = [
-    { name = "mkdocs", specifier = ">=1.5.0" },
-    { name = "mkdocs-material", specifier = ">=9.5.0" },
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.24.0" },
-    { name = "pymdown-extensions", specifier = ">=10.7.0" },
-]
-server = []

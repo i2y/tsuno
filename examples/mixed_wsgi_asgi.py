@@ -241,8 +241,8 @@ async def create_item(item: Item):
 
 
 def main():
-    """Run both Flask and FastAPI applications on a single z server."""
-    from z import serve
+    """Run both Flask and FastAPI applications on a single Tsuno server."""
+    from tsuno import serve
 
     print("=" * 70)
     print("Mixed WSGI/ASGI Application Server")
