@@ -26,6 +26,7 @@ dependencies = [
     "watchfiles>=0.24.0",
     "python-dotenv>=1.0.0",
     "click>=8.0.0",
+    "uvloop>=0.22.1",
 ]
 
 [project.urls]
@@ -39,13 +40,6 @@ tsuno = "tsuno.cli.main:main"
 [project.optional-dependencies]
 # For high-performance servers
 server = []
-
-# uvloop for application-level I/O acceleration
-# Note: Only benefits apps with external I/O (databases, APIs, file I/O)
-# tsuno's Rust transport layer does NOT use uvloop
-uvloop = [
-    "uvloop>=0.21.0; platform_system != 'Windows' and python_version < '3.14'",
-]
 
 [dependency-groups]
 # For high-performance servers
