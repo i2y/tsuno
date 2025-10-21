@@ -1,4 +1,4 @@
-# Tsuno
+# 🦄 Tsuno
 
 **High-performance WSGI/ASGI server powered by Rust**
 
@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Development Status](https://img.shields.io/badge/status-alpha-orange.svg)
 
-Tsuno aims to be a drop-in replacement for Gunicorn and Uvicorn with a Rust-powered transport layer. Run your Django, Flask, FastAPI, and Starlette applications with HTTP/2 support.
+Tsuno aims to be a drop-in replacement for Gunicorn and Uvicorn with a Rust-powered transport layer. Run your [Django](https://www.djangoproject.com/), [Flask](https://flask.palletsprojects.com/), [FastAPI](https://fastapi.tiangolo.com/), [Starlette](https://www.starlette.io/), and [connect-python](https://github.com/connectrpc/connect-python) applications with HTTP/2 support.
 
 ## Installation
 
@@ -19,7 +19,6 @@ pip install tsuno
 ### Command Line
 
 ```bash
-# Replace Gunicorn/Uvicorn
 tsuno myapp:app --workers 4 --bind 0.0.0.0:8000
 ```
 
