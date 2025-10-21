@@ -26,7 +26,7 @@ class ASGIEventLoopWorker:
     - Requests are scheduled as tasks without blocking
     """
 
-    def __init__(self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = False):
+    def __init__(self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = True):
         """
         Initialize the event loop worker.
 

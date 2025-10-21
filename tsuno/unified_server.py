@@ -191,7 +191,7 @@ def _worker_process(
     max_requests_jitter: int | None = None,
     root_path: str = "",
     forwarded_allow_ips: list[str] | None = None,
-    use_uvloop: bool = False,
+    use_uvloop: bool = True,
     access_log: bool = True,
     user: str | None = None,
     group: str | None = None,
@@ -347,7 +347,7 @@ def serve(
     limit_max_requests: int | None = None,
     timeout_keep_alive: int | None = None,
     root_path: str = "",
-    use_uvloop: bool = False,
+    use_uvloop: bool = True,
     app_dir: str | None = None,
     # Logging
     accesslog: str | None = None,

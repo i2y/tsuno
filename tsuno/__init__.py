@@ -107,7 +107,7 @@ def run(
     ssl_ciphers: str = "TLSv1",  # Uvicorn: allowed cipher suites
     # Protocol Options (Uvicorn) - Most not applicable to tsuno
     loop: str = "auto",  # Uvicorn: event loop (asyncio/uvloop) - NOT APPLICABLE (using Rust)
-    use_uvloop: bool = False,  # tsuno: Enable uvloop for application-level I/O (ASGI only)
+    use_uvloop: bool = True,  # tsuno: Enable uvloop for optimal ASGI performance (default: True)
     http: str = "auto",  # Uvicorn: HTTP impl (h11/httptools) - NOT APPLICABLE (using Hyper)
     ws: str = "auto",  # Uvicorn: WebSocket impl - NOT APPLICABLE
     ws_max_size: int = 16777216,  # Uvicorn: max WS message size - NOT APPLICABLE

@@ -22,7 +22,7 @@ class ASGIAdapter:
     in a dedicated event loop thread.
     """
 
-    def __init__(self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = False):
+    def __init__(self, asgi_app: Callable, root_path: str = "", use_uvloop: bool = True):
         """
         Initialize the ASGI adapter.
 

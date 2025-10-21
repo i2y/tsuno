@@ -63,7 +63,7 @@ class Dispatcher:
         default_app: Any = None,
         root_path: str = "",
         forwarded_allow_ips: list[str] | None = None,
-        use_uvloop: bool = False,
+        use_uvloop: bool = True,
         access_log_enabled: bool = True,
     ):
         """
