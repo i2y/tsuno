@@ -1,6 +1,6 @@
 [project]
 name = "tsuno"
-version = "0.1.2"
+version = "0.1.3"
 description = "High-performance WSGI/ASGI server for Python, powered by Rust"
 readme = "README.md"
 license = "MIT"
