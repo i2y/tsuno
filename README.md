@@ -2,7 +2,7 @@
 
 **High-performance WSGI/ASGI server powered by Rust**
 
-![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)
+![Python Version](https://img.shields.io/badge/python-3.11--3.14-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Development Status](https://img.shields.io/badge/status-alpha-orange.svg)
 
@@ -60,7 +60,7 @@ See [`examples/`](examples/) for complete working examples.
 
 - **Mixed Protocol Serving**: Serve WSGI and ASGI apps simultaneously on the same server ([example](examples/mixed_wsgi_asgi.py))
 - **High Performance**: Powered by Tokio and hyper
-- **Complete API Compatibility**: Drop-in replacement for both Gunicorn AND Uvicorn as much as possible
+- **API Compatibility**: Aims for complete compatibility with both Gunicorn and Uvicorn APIs
 - **Unix Domain Sockets**: Full UDS support for nginx integration ([example](examples/uds_example.py))
 
 ## Examples
@@ -194,8 +194,32 @@ tsuno.run(app, host="0.0.0.0", port=8000, workers=4)
 
 ## Requirements
 
-- Python 3.11 or later
+- Python 3.11-3.14
 - Rust toolchain (for building from source)
+
+## Platform Support
+
+- **macOS**: Fully supported
+- **Linux**: Fully supported
+- **Windows**: Not tested yet
+
+## Known Limitations
+
+**Project Status**: Alpha - production testing needed
+
+**Not Implemented Yet**:
+- SSL/TLS support
+- CLI daemon mode (Python API supports it via `daemon=True`)
+- Custom `worker_connections` limits
+- Error log file redirection
+
+## Contributing
+
+Contributions are welcome! Please:
+- Report issues at [github.com/i2y/tsuno/issues](https://github.com/i2y/tsuno/issues)
+- Submit pull requests for bug fixes or new features
+- Help improve documentation and examples
+
 
 ## License
 
